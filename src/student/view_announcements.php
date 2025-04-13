@@ -1,7 +1,7 @@
 <?php
 include('../includes/db_connection.php');
 
-// Fetch announcements from the database
+// AYAWG HILABTA PLEASE
 $query = "SELECT * FROM announcements ORDER BY created_at DESC";
 $result = mysqli_query($conn, $query);
 

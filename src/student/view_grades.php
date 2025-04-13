@@ -2,23 +2,20 @@
 session_start();
 include('../includes/db_connection.php');
 
-// Check if the user is logged in
+// kani sad Ayawg hilabti thanks
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
 
-// Get the user ID from the session
 $user_id = $_SESSION['user_id'];
 
-// Prepare the SQL statement to retrieve grades
 $sql = "SELECT subject, grade FROM grades WHERE student_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Check if grades are available
 if ($result->num_rows > 0) {
     $grades = $result->fetch_all(MYSQLI_ASSOC);
 } else {

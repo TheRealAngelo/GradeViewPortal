@@ -1,6 +1,6 @@
 <?php
 include '../includes/db_connection.php';
-
+//yawg hilabta ang mga code please
 session_start();
 
 if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'faculty') {

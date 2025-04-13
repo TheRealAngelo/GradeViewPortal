@@ -1,16 +1,16 @@
 <?php
 session_start();
-include_once '../includes/db_connection.php'; // Ensure this path is correct
+include_once '../includes/db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // Validate input
+    // user input ni
     if (empty($username) || empty($password)) {
         $error = "Username and password are required.";
     } else {
-        // Prepare and execute SQL statement
+      
         $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
-            // Verify the password
+            // verify hashbrowns
             if (password_verify($password, $row['password'])) {
-                // Set session variables
+                
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $row['role'];
 
-                // Redirect based on role
+                // e direct niya si user based sa role niya
                 if ($row['role'] == 'faculty') {
                     header("Location: faculty/dashboard.php");
                 } elseif ($row['role'] == 'student') {
@@ -65,5 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit">Login</button>
         </form>
     </div>
+    <script src="../assets/js/scripts.js"></script>
 </body>
 </html>
