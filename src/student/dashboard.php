@@ -2,13 +2,13 @@
 session_start();
 include_once '../../includes/db_connection.php';
 
-// Check if the user is logged in and is a student
+// monkey terms: student user so user in dashboard
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
     header("Location: ../login.php");
     exit();
 }
 
-// Fetch the student's full name
+// full name be like "Ger, Nig" Lastname, Firstname
 $name_stmt = $conn->prepare("SELECT CONCAT(LastName, ', ', FirstName) AS full_name FROM users WHERE id = ?");
 $name_stmt->bind_param("i", $_SESSION['user_id']);
 $name_stmt->execute();
@@ -40,7 +40,7 @@ $student_name = $name_result->fetch_assoc()['full_name'];
                     <th>4th Grading</th>
                 </tr>
                 <?php
-                // Fetch the student's grades
+                // get niya grades ni student
                 $sql = "SELECT s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
                         FROM grades g
                         JOIN subject s ON g.subject_id = s.id
