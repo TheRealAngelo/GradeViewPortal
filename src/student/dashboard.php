@@ -30,7 +30,7 @@ $student_name = $name_result->fetch_assoc()['full_name'];
     <div class="container">
         <?php include 'sidebar.php'; ?>
         <div class="content">
-            <h2>Your Grades</h2>
+            <h2>GRADES</h2>
             <table>
                 <tr>
                     <th>Subject</th>
@@ -58,6 +58,10 @@ $student_name = $name_result->fetch_assoc()['full_name'];
                         <td><?php echo htmlspecialchars($row['2ndGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['3rdGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['4thGrading']); ?></td>
+                        <!-- Araling Panlipunan (AP) -->
+                        <!-- MAPEH -->
+                        <!-- COMPUTER/TLE -->
+                        <!-- MAPEH -->
                     </tr>
                 <?php endwhile; ?>
             </table>
