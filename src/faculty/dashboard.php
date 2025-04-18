@@ -89,31 +89,33 @@ while ($row = $result->fetch_assoc()) {
     <?php include 'sidebar.php'; ?>
         <div class="content">
             <h2>All Students' Grades</h2>
+            <div class="searchDIV">
+                <form method="GET" action="dashboard.php">
+                    <input type="text" name="search" placeholder="Search by name or subject" value="<?php echo htmlspecialchars($search); ?>">
+                    <select name="yearlevel">
+                        <option value="0">All Year Levels</option>
+                        <option value="1" <?php echo $filter_yearlevel == 1 ? 'selected' : ''; ?>>Grade 7</option>
+                        <option value="2" <?php echo $filter_yearlevel == 2 ? 'selected' : ''; ?>>Grade 8</option>
+                        <option value="3" <?php echo $filter_yearlevel == 3 ? 'selected' : ''; ?>>Grade 9</option>
+                        <option value="4" <?php echo $filter_yearlevel == 4 ? 'selected' : ''; ?>>Grade 10</option>
+                    </select>
+                    <select name="school_year">
+                        <option value="0">All School Years</option>
+                        <?php
+                        $school_years = $conn->query("SELECT id, year_start, year_end FROM school_year ORDER BY year_start DESC");
+                        while ($row = $school_years->fetch_assoc()) {
+                            $selected = ($filter_school_year == $row['id']) ? 'selected' : '';
+                            echo "<option value='{$row['id']}' $selected>{$row['year_start']}-{$row['year_end']}</option>";
+                        }
+                        ?>
+                    </select>
+                    <button type="submit">Search</button>
+                </form>
 
-            <form method="GET" action="dashboard.php">
-                <input type="text" name="search" placeholder="Search by name or subject" value="<?php echo htmlspecialchars($search); ?>">
-                <select name="yearlevel">
-                    <option value="0">All Year Levels</option>
-                    <option value="1" <?php echo $filter_yearlevel == 1 ? 'selected' : ''; ?>>Grade 7</option>
-                    <option value="2" <?php echo $filter_yearlevel == 2 ? 'selected' : ''; ?>>Grade 8</option>
-                    <option value="3" <?php echo $filter_yearlevel == 3 ? 'selected' : ''; ?>>Grade 9</option>
-                    <option value="4" <?php echo $filter_yearlevel == 4 ? 'selected' : ''; ?>>Grade 10</option>
-                </select>
-                <select name="school_year">
-                    <option value="0">All School Years</option>
-                    <?php
-                    $school_years = $conn->query("SELECT id, year_start, year_end FROM school_year ORDER BY year_start DESC");
-                    while ($row = $school_years->fetch_assoc()) {
-                        $selected = ($filter_school_year == $row['id']) ? 'selected' : '';
-                        echo "<option value='{$row['id']}' $selected>{$row['year_start']}-{$row['year_end']}</option>";
-                    }
-                    ?>
-                </select>
-                <button type="submit">Search</button>
-            </form>
-
+            </div>
+            
             <form method="POST" action="update_grades.php">
-                <table>
+                <table class="noMarginTop noRoundTopLeftCorner">
                     <tr>
                         <th>Student Name</th>
                         <th>Subject</th>
@@ -125,7 +127,7 @@ while ($row = $result->fetch_assoc()) {
                     </tr>
                     <?php foreach ($students as $student): ?>
                         <tr>
-                            <td rowspan="<?php echo count($student['grades']); ?>"><?php echo htmlspecialchars($student['name']); ?></td>
+                            <td class="stud-name noHover" rowspan="<?php echo count($student['grades']); ?>"><?php echo htmlspecialchars($student['name']); ?></td>
                             <?php $first_grade = array_shift($student['grades']); ?>
                             <td><?php echo htmlspecialchars($first_grade['subject_name']); ?></td>
                             <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][1stGrading]" value="<?php echo htmlspecialchars($first_grade['1stGrading']); ?>"></td>
