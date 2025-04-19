@@ -5,4 +5,5 @@
 
 <div class="header-right">
         <!-- This shit is for right side of header, like pfp and shit --> 
+        <h1><?php echo htmlspecialchars($faculty_name); ?></h1>
 </div>
