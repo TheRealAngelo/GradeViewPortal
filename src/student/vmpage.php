@@ -30,7 +30,7 @@ $student_name = $name_result->fetch_assoc()['full_name'];
     <div class="container">
         <?php include 'sidebar.php'; ?>
         <div class="content">
-        <img src="ADD VISMIS HERE" 
+        <img src="../../assets/images/vis-mis-page.jpg" 
         style="padding: 1rem 2rem 2rem 2rem;
                 width: max-content;
                 height: 60rem;
