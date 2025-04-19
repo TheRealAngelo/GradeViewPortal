@@ -46,10 +46,11 @@ $yearLevel = $details['year_level'];
     </header>
     <div class="container">
         <?php include 'sidebar.php'; ?> 
+
         <div class="content">
             <h2 class="text-center">Welcome, <?php echo htmlspecialchars($student_name); ?></h2>
             <h3 class="text-center">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
-            <h4 class="text-center">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
+            <h3 class="text-center">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
 
             <div style="display:flex; flex-direction: column; align-items: center; font-weight: bolder">
                 <div class="dash-student-container">

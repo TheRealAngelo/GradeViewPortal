@@ -422,3 +422,46 @@ table button{
 .noRoundTopLeftCorner{
     border-top-left-radius: 0;
 }
+.dash-student-container {
+    margin: 20px auto;
+}
+
+.dash-student-card {
+    background-color: #16423C;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dash-student-card i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.dash-student-card h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.student-info-box {
+    background-color: #e0f7fa;
+    color: #00796b;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.student-info-box i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.student-info-box p {
+    margin: 0;
+    font-size: 14px;
+}
