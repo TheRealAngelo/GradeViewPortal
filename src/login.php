@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($row['role'] == 'faculty') {
                     header("Location: faculty/dashboard.php");
                 } elseif ($row['role'] == 'student') {
-                    header("Location: student/dashboard.php");
+                    header("Location: student/maindashboard.php");
                 }
                 exit();
             } else {
