@@ -1,6 +1,4 @@
 <div class="sidebar">
-    <h3>Welcome <?php echo htmlspecialchars($student_name); ?>!</h3>
-    <small>student id</small>
     <div>
         <ul>
             <li><a href="dashboard.php"><img src="../../assets/icons/icons8-assessment-100.png">View Grades</a></li>

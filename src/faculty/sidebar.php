@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h3>Welcome <?php echo htmlspecialchars($faculty_name); ?>!</h3>
     <div>
         <ul>
             <li><a href="dashboard.php" class="active"><img src="../../assets/icons/icons8-assessment-100.png">Update Grades</a></li>
