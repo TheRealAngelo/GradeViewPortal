@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // e direct niya si user based sa role niya
                 if ($row['role'] == 'faculty') {
-                    header("Location: faculty/dashboard.php");
+                    header("Location: faculty/maindashboard.php");
                 } elseif ($row['role'] == 'student') {
                     header("Location: student/maindashboard.php");
                 }

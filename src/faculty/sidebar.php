@@ -9,6 +9,7 @@
             }
         </style>
         <ul>
+        <li><a href="maindashboard.php"><img src="../../assets/icons/icons8-announcement-100.png">Dashboard</a></li>
             <li><a href="dashboard.php" class="active"><img src="../../assets/icons/icons8-assessment-100.png">Update Grades</a></li>
             <li><a href="announcements.php"><img src="../../assets/icons/icons8-announcement-100.png">Update Announcements</a></li>
         </ul>
