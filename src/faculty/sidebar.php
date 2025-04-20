@@ -1,5 +1,13 @@
 <div class="sidebar">
-    <div>
+    <div class="sidebar-content">
+    <style>
+            .sidebar-content{
+                display: flex; 
+                flex-direction:column;
+                justify-content: space-between; 
+                height: 100%;
+            }
+        </style>
         <ul>
             <li><a href="dashboard.php" class="active"><img src="../../assets/icons/icons8-assessment-100.png">Update Grades</a></li>
             <li><a href="announcements.php"><img src="../../assets/icons/icons8-announcement-100.png">Update Announcements</a></li>

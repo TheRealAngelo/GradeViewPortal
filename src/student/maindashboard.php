@@ -48,9 +48,11 @@ $yearLevel = $details['year_level'];
         <?php include 'sidebar.php'; ?> 
 
         <div class="content">
-            <h2 class="text-center">Welcome, <?php echo htmlspecialchars($student_name); ?></h2>
-            <h3 class="text-center">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
-            <h3 class="text-center">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: max-content; width: fit-content; font-style: bold;">
+                <h1 style="width: fit-content;">Welcome, <?php echo htmlspecialchars($student_name); ?></h1>
+                <h3 style="width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
+                <small style="width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
+            </div>
 
             <div style="display:flex; flex-direction: column; align-items: center; font-weight: bolder">
                 <div class="dash-student-container">
