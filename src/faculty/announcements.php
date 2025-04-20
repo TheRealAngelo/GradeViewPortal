@@ -77,7 +77,7 @@ $result = $conn->query($sql);
     </header>
     <div class="container">
         <?php include 'sidebar.php'; ?>
-        <div class="content">
+        <div class="content noCenter">
             <h2>Update Announcements</h2>
             <?php if (!empty($message)): ?>
                 <p><?php echo htmlspecialchars($message); ?></p>

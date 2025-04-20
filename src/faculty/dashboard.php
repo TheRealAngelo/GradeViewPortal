@@ -87,7 +87,7 @@ while ($row = $result->fetch_assoc()) {
     </header>
     <div class="container">
     <?php include 'sidebar.php'; ?>
-        <div class="content">
+        <div class="content noCenter">
             <h2>All Students' Grades</h2>
             <div class="searchDIV">
                 <form method="GET" action="dashboard.php">
