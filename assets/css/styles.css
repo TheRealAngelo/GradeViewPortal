@@ -46,6 +46,8 @@ header {
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
+    top: 0; /* Ensure it sticks to the top */
+    z-index: 1000; /* Ensure it stays above other elements */
 }
 
 .header-left{
@@ -76,17 +78,23 @@ header {
 .container {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    margin-left: 250px; /* Offset content to account for the sidebar */
+    padding-top: 70px; /* Offset content to account for the sticky header */
+    height: auto; /* Ensure it adjusts dynamically */
+    overflow: visible; /* Prevent overflow issues */
 }
 
 .sidebar {
-    height: inherit;
+    height: 100vh; /* Ensure it spans the full viewport height */
     width: 250px;
-    height: 103vh;
     background-color: var(--green);
     color: black;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Make it fixed to the left */
+    top: 0;
+    left: 0;
+    z-index: 999; /* Ensure it stays below the header */
 }
 
 .sidebar div ul li{
