@@ -14,6 +14,13 @@ $name_stmt->bind_param("i", $_SESSION['user_id']);
 $name_stmt->execute();
 $name_result = $name_stmt->get_result();
 $student_name = $name_result->fetch_assoc()['full_name'];
+
+// Fetch the current school year
+$school_year_stmt = $conn->prepare("SELECT CONCAT(year_start, ' - ', year_end) AS school_year FROM school_year ORDER BY year_start DESC LIMIT 1");
+$school_year_stmt->execute();
+$school_year_result = $school_year_stmt->get_result();
+$schoolYear = $school_year_result->fetch_assoc()['school_year'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +38,7 @@ $student_name = $name_result->fetch_assoc()['full_name'];
         <?php include 'sidebar.php'; ?>
         <div class="content">
             <h2>GRADES</h2>
+            <h3 style="width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
             <table>
                 <tr>
                     <th>Subject</th>
@@ -38,6 +46,8 @@ $student_name = $name_result->fetch_assoc()['full_name'];
                     <th>2nd Grading</th>
                     <th>3rd Grading</th>
                     <th>4th Grading</th>
+                    <th>Average</th>
+                    <th>Remarks</th>
                 </tr>
                 <?php
                 // get niya grades ni student
@@ -58,6 +68,19 @@ $student_name = $name_result->fetch_assoc()['full_name'];
                         <td><?php echo htmlspecialchars($row['2ndGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['3rdGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['4thGrading']); ?></td>
+                        <td><?php 
+                            $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
+                            echo htmlspecialchars(round($average));
+                        ?></td>
+                        <td>
+                            <?php 
+                            if ($row['1stGrading'] == 0 || $row['2ndGrading'] == 0 || $row['3rdGrading'] == 0 || $row['4thGrading'] == 0) {
+                                echo 'IN PROCESS';
+                            } else {
+                                echo $average >= 75 ? 'PASSED' : 'FAIL';
+                            }
+                            ?>
+                        </td>
                         <!-- Araling Panlipunan (AP) -->
                         <!-- MAPEH -->
                         <!-- COMPUTER/TLE -->
