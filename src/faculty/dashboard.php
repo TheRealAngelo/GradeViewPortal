@@ -155,5 +155,6 @@ while ($row = $result->fetch_assoc()) {
             </form>
         </div>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

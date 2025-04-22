@@ -67,5 +67,6 @@ $announcement_count = $announcement_count_result->fetch_assoc()['announcement_co
             </div>
         </div> 
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

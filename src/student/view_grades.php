@@ -56,7 +56,6 @@ $conn->close();
             <p>No grades available.</p>
         <?php endif; ?>
     </div>
-
-    <?php include('../includes/footer.php'); ?>
+<script src="../../includes/timeout.js"></script>
 </body>
 </html>

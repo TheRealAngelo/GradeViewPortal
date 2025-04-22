@@ -56,5 +56,6 @@
              </table>
          </div>
      </div>
+     <script src="../../includes/timeout.js"></script>
  </body>
  </html>

@@ -2,13 +2,13 @@
 session_start();
 include_once '../../includes/db_connection.php';
 
-// monkey terms: student user so user in dashboard
+// Check if the user is a student
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
     header("Location: ../login.php");
     exit();
 }
 
-// full name be like "Ger, Nig" Lastname, Firstname
+// Fetch the student's full name
 $name_stmt = $conn->prepare("SELECT CONCAT(LastName, ', ', FirstName) AS full_name FROM users WHERE id = ?");
 $name_stmt->bind_param("i", $_SESSION['user_id']);
 $name_stmt->execute();
@@ -20,7 +20,6 @@ $school_year_stmt = $conn->prepare("SELECT CONCAT(year_start, ' - ', year_end) A
 $school_year_stmt->execute();
 $school_year_result = $school_year_stmt->get_result();
 $schoolYear = $school_year_result->fetch_assoc()['school_year'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +49,7 @@ $schoolYear = $school_year_result->fetch_assoc()['school_year'];
                     <th>Remarks</th>
                 </tr>
                 <?php
-                // get niya grades ni student
+                // Fetch the student's grades
                 $sql = "SELECT s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
                         FROM grades g
                         JOIN subject s ON g.subject_id = s.id
@@ -81,14 +80,11 @@ $schoolYear = $school_year_result->fetch_assoc()['school_year'];
                             }
                             ?>
                         </td>
-                        <!-- Araling Panlipunan (AP) -->
-                        <!-- MAPEH -->
-                        <!-- COMPUTER/TLE -->
-                        <!-- MAPEH -->
                     </tr>
                 <?php endwhile; ?>
             </table>
         </div>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

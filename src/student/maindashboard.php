@@ -75,5 +75,6 @@ $yearLevel = $details['year_level'];
             </div>
         </div>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

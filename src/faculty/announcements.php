@@ -117,5 +117,6 @@ $result = $conn->query($sql);
             </table>
         </div>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

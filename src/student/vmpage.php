@@ -43,5 +43,6 @@ $student_name = $name_result->fetch_assoc()['full_name'];
                 margin: 0 auto;     ">
         </div>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>

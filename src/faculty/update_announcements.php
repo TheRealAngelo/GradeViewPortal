@@ -49,5 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Post Announcement</button>
         </form>
     </div>
+    <script src="../../includes/timeout.js"></script>
 </body>
 </html>
