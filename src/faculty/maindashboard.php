@@ -49,14 +49,14 @@ $announcement_count = $announcement_count_result->fetch_assoc()['announcement_co
         <?php include 'sidebar.php'; ?>
         <div class="content">
             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: max-content; width: fit-content; font-style: bold;">
-                <h2 style="width: fit-content;">Welcome, <?php echo htmlspecialchars($faculty_name); ?>!</h2>
+                <h2 style="width: fit-content;"><?php echo htmlspecialchars($faculty_name); ?></h2>
                 <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
-                        <h3>Total Active Students</h3>
+                        <h3>Total Enrolled Students</h3>
                         <p><?php echo $student_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
-                        <h3>Total Active Faculty</h3>
+                        <h3>Total Faculty</h3>
                         <p><?php echo $faculty_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">

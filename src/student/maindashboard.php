@@ -49,7 +49,7 @@ $yearLevel = $details['year_level'];
 
         <div class="content content-dashboard">
             <div>
-                <h1 style="width: fit-content;">Welcome, <?php echo htmlspecialchars($student_name); ?></h1>
+                <h1 style="width: fit-content;"><?php echo htmlspecialchars($student_name); ?></h1>
                 <h3 style="width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
                 <small style="width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
             </div>
