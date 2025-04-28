@@ -86,7 +86,7 @@ while ($row = $result->fetch_assoc()) {
         <?php include 'header.php'; ?>
     </header>
     <div class="container">
-    <?php include 'sidebar.php'; ?>
+        <?php include 'sidebar.php'; ?>
         <div class="content noCenter">
             <h2>All Students' Grades</h2>
             <div class="searchDIV">
@@ -135,7 +135,7 @@ while ($row = $result->fetch_assoc()) {
                             <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($first_grade['3rdGrading']); ?>"></td>
                             <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($first_grade['4thGrading']); ?>"></td>
                             <td>
-                                <button type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>">Save</button>
+                                <button type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
                             </td>
                         </tr>
                         <?php foreach ($student['grades'] as $grade): ?>
@@ -146,7 +146,7 @@ while ($row = $result->fetch_assoc()) {
                                 <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($grade['3rdGrading']); ?>"></td>
                                 <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($grade['4thGrading']); ?>"></td>
                                 <td>
-                                    <button type="submit" name="update" value="<?php echo $grade['grade_id']; ?>">Save</button>
+                                    <button type="submit" name="update" value="<?php echo $grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

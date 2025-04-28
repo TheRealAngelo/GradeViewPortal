@@ -38,6 +38,20 @@ $result = $conn->query($sql);
         <?php include 'sidebar.php'; ?>
         <div class="content">
             <h2>Announcements</h2>
+            <div class="announcements-wrapper">
+                <?php while ($row = $result->fetch_assoc()): ?>
+                    <small><?php echo htmlspecialchars($row['created_at']); ?></small>
+                <div class="announcementsDIV">
+                    <div class="announcementsTitle">
+                        <?php echo htmlspecialchars($row['title']); ?><br>
+                        <p style="margin: 0.5rem 0">By: <?php echo htmlspecialchars($row['created_by']); ?><br></p>
+                    </div>
+                    <div class="announcementsContent">
+                        <?php echo htmlspecialchars($row['content']); ?>
+                    </div>
+                </div>
+                <?php endwhile; ?>
+            </div>
             <table>
                 <tr>
                     <th>Title</th>

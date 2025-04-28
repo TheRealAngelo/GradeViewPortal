@@ -47,30 +47,28 @@ $yearLevel = $details['year_level'];
     <div class="container ">
         <?php include 'sidebar.php'; ?> 
 
-        <div class="content content-dashboard">
-            <div>
+        <div class="content">
+            <div style="display: flex; flex-direction: column; align-items: center;">
                 <h1 style="width: fit-content;"><?php echo htmlspecialchars($student_name); ?></h1>
                 <h3 style="width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
-                <small style="width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></h4>
+                <small style="width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></small>
             </div>
 
-            <div>
-                <div class="dash-student-container">
-                    <div class="dash-student-card">
-                        <div>
-                            <h2>All Students</h2>
-                            <h2>Data Privacy Policy</h2>
-                        </div>
+            <div style="width: 100%;">
+                <div class="dash-student-card">
+                    <div>
+                        <h2>All Students</h2>
+                        <h2>Data Privacy Policy</h2>
                     </div>
-                    <div class="dash-student-card">
-                        <div>
-                            <h2>All Students</h2>
-                            <h2>Online Classroom Learning Environment Survey</h2>
-                        </div>
+                </div>
+                <div class="dash-student-card">
+                    <div>
+                        <h2>All Students</h2>
+                        <h2>Online Classroom Learning Environment Survey</h2>
                     </div>
-                    <div class="student-info-box">
-                        <p>For any concerns regarding your assessment, please visit the Cashier Office or contact them at 0999-999-9999.</p>
-                    </div>
+                </div>
+                <div class="student-info-box">
+                    <p>For any concerns regarding your assessment, please visit the Cashier Office or contact them at 0999-999-9999.</p>
                 </div>
             </div>
         </div>
