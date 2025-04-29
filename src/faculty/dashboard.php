@@ -71,6 +71,7 @@ require 'dashboardfunc.php';
                         ?>
                     </select>
                     <button type="submit">Search</button>
+                </form>
             </div>
             
             <form method="POST" action="update_grades.php">
@@ -105,8 +106,7 @@ require 'dashboardfunc.php';
                                 <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($grade['3rdGrading']); ?>"></td>
                                 <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($grade['4thGrading']); ?>"></td>
                                 <td>
-                                    <button type="submit" name="update" value="<?php echo $grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
-                                </td>
+                                <button type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
