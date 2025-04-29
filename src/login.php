@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 exit();
             } else {
-                $error = "Invalid username or password.";
+                $error = "*Invalid username or password.";
             }
         } else {
-            $error = "Invalid username or password.";
+            $error = "*Invalid username or password.";
         }
 
         $stmt->close();
@@ -70,17 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
     <div class="login-wrapper">
         <div class="login-container">
-            <img src="../assets/images/SVA_logo.png">
-            <h2>Login</h2>
-            <?php if (isset($error)): ?>
-                <div class="error"><?php echo $error; ?></div>
-            <?php endif; ?>
-            <div class="login-container-inputs">
-                <form method="POST" action="">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
-                </form>
+            <div class="login-img-container">
+                <img src="../assets/images/SVA_logo.png">
+            </div>
+            <div class="login-inputs-things">
+                <h1>Grade View Portal</h1>
+                <h2>SIGN IN</h2>
+                <div class="login-container-inputs">
+                    <form method="POST" action="">
+                        <input type="text" id="username" name="username" placeholder="Username" required>
+                        <input type="password" id="password" name="password" placeholder="Password" required>
+                        <?php if (isset($error)): ?>
+                            <div class="error"><?php echo $error; ?></div>
+                        <?php endif; ?>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

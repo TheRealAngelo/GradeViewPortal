@@ -6,7 +6,6 @@
                 flex-direction:column;
                 justify-content: space-between; 
                 height: 100%;
-                flex-direction: column;
             }
     </style>
         <ul>
