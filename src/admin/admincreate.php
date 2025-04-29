@@ -5,18 +5,19 @@ include '../../includes/db_connection.php';
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //Data GET NATO
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    $role = trim($_POST['role']);
-    $first_name = trim($_POST['first_name']);
-    $last_name = trim($_POST['last_name']);
+    // Check if all required fields are set
+    $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+    $role = isset($_POST['role']) ? trim($_POST['role']) : '';
+    $first_name = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
+    $last_name = isset($_POST['last_name']) ? trim($_POST['last_name']) : '';
     $yearlevel_id = isset($_POST['yearlevel_id']) ? intval($_POST['yearlevel_id']) : null;
 
-    // validate ni ayawg hilbati ok na ni
+    // Validate required fields
     if (empty($username) || empty($password) || empty($role) || empty($first_name) || empty($last_name) || ($role === 'student' && empty($yearlevel_id))) {
         $message = "All fields are required.";
     } else {
+        // Proceed with the rest of the logic
         // verify kung naa na
         $check_sql = "SELECT id FROM users WHERE username = ?";
         $check_stmt = $conn->prepare($check_sql);
@@ -83,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Add Faculty or Student</h1>
-    <form method="POST" action="admin.php">
+    <form method="POST" action="admincreate.php">
         <label for="first_name">First Name:</label>
         <input type="text" id="first_name" name="first_name" required><br><br>
 

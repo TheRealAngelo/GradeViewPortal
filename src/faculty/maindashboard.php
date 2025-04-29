@@ -32,6 +32,7 @@ $announcement_count_stmt = $conn->prepare("SELECT COUNT(*) AS announcement_count
 $announcement_count_stmt->execute();
 $announcement_count_result = $announcement_count_stmt->get_result();
 $announcement_count = $announcement_count_result->fetch_assoc()['announcement_count'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,23 +48,62 @@ $announcement_count = $announcement_count_result->fetch_assoc()['announcement_co
     </header>
     <div class="container">
         <?php include 'sidebar.php'; ?>
-        <div class="content">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: max-content; width: fit-content; font-style: bold;">
-                <h2 style="width: fit-content;"><?php echo htmlspecialchars($faculty_name); ?></h2>
-                <div class="dash-faculty-stats">
+        <div class="content content-dashboard noCenter">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: max-content; width: 100%; font-style: bold;">
+                <h2 style="width: 100%; margin-bottom: 2rem;">Total Enrolled students</h2>
+                <div style="width: 100%; height: 100%;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                    const ctx = document.getElementById('myChart');
+                    
+                    fetch("script.php")
+                    .then((response)=> {
+                        return response.json(); 
+                    })
+                    .then((data) => {
+                        createChart(data, 'bar')
+                    });
+
+                    function createChart(chartData, type){
+                    new Chart(ctx, {
+                        type: type,
+                        data: {
+                            labels: chartData.map(row => row.year), 
+                            datasets: [{
+                                label: '# of Students',
+                                data: chartData.map(row => row.users),
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)', 
+                                borderColor: 'rgba(54, 162, 235, 1)'
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+                </script>
+                <!-- <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
                         <h3>Total Enrolled Students</h3>
-                        <p><?php echo $student_count; ?></p>
+                        <p><php echo $student_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
                         <h3>Total Faculty</h3>
-                        <p><?php echo $faculty_count; ?></p>
+                        <p><php echo $faculty_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
                         <h3>Total Announcements</h3>
-                        <p><?php echo $announcement_count; ?></p>
+                        <p><php echo $announcement_count; ?></p>
                     </div>
-                </div>
+                </div> --> 
             </div>
         </div> 
     </div>
