@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2025 at 05:09 PM
+-- Generation Time: Apr 29, 2025 at 07:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,6 +63,28 @@ CREATE TABLE `grades` (
   `subject_id` int(11) DEFAULT NULL,
   `school_year_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `grades`
+--
+
+INSERT INTO `grades` (`id`, `student_id`, `1stGrading`, `2ndGrading`, `3rdGrading`, `4thGrading`, `created_by`, `created_at`, `yearlevel_id`, `subject_id`, `school_year_id`) VALUES
+(150, 8, 50, 50, 50, 0, 2, '2025-04-29 16:31:21', 1, 17, 1),
+(151, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 18, 1),
+(152, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 19, 1),
+(153, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 20, 1),
+(154, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 21, 1),
+(155, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 22, 1),
+(156, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 23, 1),
+(157, 8, 100, 100, 100, 0, 2, '2025-04-29 16:31:21', 1, 24, 1),
+(191, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 33, 1),
+(192, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 34, 1),
+(193, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 35, 1),
+(194, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 36, 1),
+(195, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 37, 1),
+(196, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 38, 1),
+(197, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 39, 1),
+(198, 9, 0, 0, 0, 0, 9, '2025-04-29 17:08:48', 3, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -195,7 +217,7 @@ ALTER TABLE `announcements`
 --
 ALTER TABLE `grades`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_grades_student_id` (`student_id`),
+  ADD UNIQUE KEY `unique_grade_entry` (`student_id`,`subject_id`,`school_year_id`),
   ADD KEY `fk_grades_created_by` (`created_by`),
   ADD KEY `yearlevel_id` (`yearlevel_id`),
   ADD KEY `subject_id` (`subject_id`),
@@ -242,7 +264,7 @@ ALTER TABLE `announcements`
 -- AUTO_INCREMENT for table `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 
 --
 -- AUTO_INCREMENT for table `school_year`
@@ -254,7 +276,7 @@ ALTER TABLE `school_year`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `users`
