@@ -2,24 +2,71 @@
 session_start();
 include_once '../../includes/db_connection.php';
 
-// mag check ni if user is Faculty
+// Check if user is Faculty
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
     header("Location: ../login.php");
     exit();
 }
 
-// Full name parin kai ECONCAT ang latname og firstname
+// Get faculty name
 $name_stmt = $conn->prepare("SELECT CONCAT(LastName, ', ', FirstName) AS full_name FROM users WHERE id = ?");
 $name_stmt->bind_param("i", $_SESSION['user_id']);
 $name_stmt->execute();
 $name_result = $name_stmt->get_result();
 $faculty_name = $name_result->fetch_assoc()['full_name'];
 
-// pang search function ayawg hilbati pls
+// Filters
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $filter_yearlevel = isset($_GET['yearlevel']) ? intval($_GET['yearlevel']) : 0;
+$filter_subject = isset($_GET['subject']) ? intval($_GET['subject']) : 0;
 $filter_school_year = isset($_GET['school_year']) ? intval($_GET['school_year']) : 0;
 
+// Fetch subjects dynamically based on year level
+$subjects = [];
+if ($filter_yearlevel > 0) {
+    // Fetch subjects for the selected year level
+    $subject_stmt = $conn->prepare("SELECT id, subject_name FROM subject WHERE yearlevel_id = ?");
+    $subject_stmt->bind_param("i", $filter_yearlevel);
+    $subject_stmt->execute();
+    $subject_result = $subject_stmt->get_result();
+    while ($row = $subject_result->fetch_assoc()) {
+        $subjects[] = $row;
+    }
+} else {
+    // Fetch all subjects if "All Year Levels" is selected
+    $subject_result = $conn->query("SELECT id, subject_name FROM subject");
+    while ($row = $subject_result->fetch_assoc()) {
+        $subjects[] = $row;
+    }
+}
+
+// Handle AJAX request for subjects
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'subjects' && isset($_GET['yearlevel'])) {
+    $yearlevel = intval($_GET['yearlevel']);
+    $subjects = [];
+
+    if ($yearlevel > 0) {
+        // Fetch subjects for the selected year level
+        $stmt = $conn->prepare("SELECT id, subject_name FROM subject WHERE yearlevel_id = ?");
+        $stmt->bind_param("i", $yearlevel);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $subjects[] = $row;
+        }
+    } else {
+        // Fetch all subjects if "All Year Levels" is selected
+        $result = $conn->query("SELECT id, subject_name FROM subject");
+        while ($row = $result->fetch_assoc()) {
+            $subjects[] = $row;
+        }
+    }
+
+    echo json_encode($subjects);
+    exit();
+}
+
+// SQL query for fetching students and grades
 $sql = "SELECT u.id AS student_id, CONCAT(u.LastName, ', ', u.FirstName) AS student_name, 
         s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`, g.id AS grade_id, sy.year_start, sy.year_end
         FROM grades g
@@ -34,31 +81,45 @@ if (!empty($search)) {
 if ($filter_yearlevel > 0) {
     $sql .= " AND g.yearlevel_id = ?";
 }
+if ($filter_subject > 0) {
+    $sql .= " AND g.subject_id = ?";
+}
 if ($filter_school_year > 0) {
     $sql .= " AND g.school_year_id = ?";
 }
 $sql .= " ORDER BY sy.year_start DESC, u.LastName, u.FirstName, s.subject_name";
 
+// Dynamically build the query and bind parameters
+$params = [];
+$types = ''; // This will store the types for bind_param (e.g., 's', 'i')
+
+// Add filters to the query dynamically
+if (!empty($search)) {
+    $search_param = "%$search%";
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $params[] = $search_param;
+    $types .= 'sss'; // Three string parameters for search
+}
+if ($filter_yearlevel > 0) {
+    $params[] = $filter_yearlevel;
+    $types .= 'i'; // Integer parameter for yearlevel
+}
+if ($filter_subject > 0) {
+    $params[] = $filter_subject;
+    $types .= 'i'; // Integer parameter for subject
+}
+if ($filter_school_year > 0) {
+    $params[] = $filter_school_year;
+    $types .= 'i'; // Integer parameter for school_year
+}
+
+// Prepare the SQL statement
 $stmt = $conn->prepare($sql);
 
-if (!empty($search) && $filter_yearlevel > 0 && $filter_school_year > 0) {
-    $search_param = "%$search%";
-    $stmt->bind_param("sssii", $search_param, $search_param, $search_param, $filter_yearlevel, $filter_school_year);
-} elseif (!empty($search) && $filter_yearlevel > 0) {
-    $search_param = "%$search%";
-    $stmt->bind_param("sssi", $search_param, $search_param, $search_param, $filter_yearlevel);
-} elseif (!empty($search) && $filter_school_year > 0) {
-    $search_param = "%$search%";
-    $stmt->bind_param("sssi", $search_param, $search_param, $search_param, $filter_school_year);
-} elseif ($filter_yearlevel > 0 && $filter_school_year > 0) {
-    $stmt->bind_param("ii", $filter_yearlevel, $filter_school_year);
-} elseif (!empty($search)) {
-    $search_param = "%$search%";
-    $stmt->bind_param("sss", $search_param, $search_param, $search_param);
-} elseif ($filter_yearlevel > 0) {
-    $stmt->bind_param("i", $filter_yearlevel);
-} elseif ($filter_school_year > 0) {
-    $stmt->bind_param("i", $filter_school_year);
+// Bind parameters dynamically
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params); // Use spread operator to pass parameters
 }
 
 $stmt->execute();
@@ -71,7 +132,17 @@ while ($row = $result->fetch_assoc()) {
     $students[$row['student_id']]['name'] = $row['student_name'];
     $students[$row['student_id']]['grades'][] = $row;
 }
-//hanggan sa duloooo ng joke ito taman ng search function nice noh
+
+$stmt->execute();
+if ($stmt->error) {
+    error_log("Database error: " . $stmt->error);
+}
+$result = $stmt->get_result();
+$students = [];
+while ($row = $result->fetch_assoc()) {
+    $students[$row['student_id']]['name'] = $row['student_name'];
+    $students[$row['student_id']]['grades'][] = $row;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,6 +151,29 @@ while ($row = $result->fetch_assoc()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faculty Dashboard</title>
     <link rel="stylesheet" href="../../assets/css/styles.css">
+    <script>
+        function updateSubjects(yearLevelId) {
+            const subjectDropdown = document.getElementById('subject');
+            subjectDropdown.innerHTML = '<option value="0">Loading...</option>'; // Show loading state
+
+            // Fetch subjects dynamically based on the selected year level
+            fetch(`dashboard.php?ajax=subjects&yearlevel=${yearLevelId}`)
+                .then(response => response.json())
+                .then(data => {
+                    subjectDropdown.innerHTML = '<option value="0">All Subjects</option>'; // Reset options
+                    data.forEach(subject => {
+                        const option = document.createElement('option');
+                        option.value = subject.id;
+                        option.textContent = subject.subject_name;
+                        subjectDropdown.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching subjects:', error);
+                    subjectDropdown.innerHTML = '<option value="0">Error loading subjects</option>';
+                });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -91,13 +185,21 @@ while ($row = $result->fetch_assoc()) {
             <h2>All Students' Grades</h2>
             <div class="searchDIV">
                 <form method="GET" action="dashboard.php">
-                    <input type="text" name="search" placeholder="Search by name or subject" value="<?php echo htmlspecialchars($search); ?>">
-                    <select name="yearlevel">
+                    <input type="text" name="search" placeholder="Search Name" value="<?php echo htmlspecialchars($search); ?>">
+                    <select name="yearlevel" id="yearlevel" onchange="updateSubjects(this.value)">
                         <option value="0">All Year Levels</option>
                         <option value="1" <?php echo $filter_yearlevel == 1 ? 'selected' : ''; ?>>Grade 7</option>
                         <option value="2" <?php echo $filter_yearlevel == 2 ? 'selected' : ''; ?>>Grade 8</option>
                         <option value="3" <?php echo $filter_yearlevel == 3 ? 'selected' : ''; ?>>Grade 9</option>
                         <option value="4" <?php echo $filter_yearlevel == 4 ? 'selected' : ''; ?>>Grade 10</option>
+                    </select>
+                    <select name="subject" id="subject">
+                        <option value="0">All Subjects</option>
+                        <?php foreach ($subjects as $subject): ?>
+                            <option value="<?php echo $subject['id']; ?>" <?php echo $filter_subject == $subject['id'] ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($subject['subject_name']); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                     <select name="school_year">
                         <option value="0">All School Years</option>
@@ -111,7 +213,6 @@ while ($row = $result->fetch_assoc()) {
                     </select>
                     <button type="submit">Search</button>
                 </form>
-
             </div>
             
             <form method="POST" action="update_grades.php">
@@ -155,6 +256,5 @@ while ($row = $result->fetch_assoc()) {
             </form>
         </div>
     </div>
-    <script src="../../includes/timeout.js"></script>
 </body>
 </html>
