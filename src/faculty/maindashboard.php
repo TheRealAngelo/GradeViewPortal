@@ -68,26 +68,28 @@ $announcement_count = $announcement_count_result->fetch_assoc()['announcement_co
                     });
 
                     function createChart(chartData, type){
-                        new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                            labels: chartData.map(row=>row.created_at),
+                    new Chart(ctx, {
+                        type: type,
+                        data: {
+                            labels: chartData.map(row => row.year), 
                             datasets: [{
-                                label: '# of Votes',
-                                data: chartData.map(row=>row.users),
-                                borderWidth: 1
+                                label: '# of Students',
+                                data: chartData.map(row => row.users),
+                                borderWidth: 1,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)', 
+                                borderColor: 'rgba(54, 162, 235, 1)'
                             }]
-                            },
-                            options: {
+                        },
+                        options: {
                             scales: {
                                 y: {
-                                beginAtZero: true
+                                    beginAtZero: true
                                 }
                             }
-                            }
-                        });
-                    }
-                    </script>
+                        }
+                    });
+                }
+                </script>
                 <!-- <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
                         <h3>Total Enrolled Students</h3>

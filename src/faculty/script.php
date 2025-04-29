@@ -1,21 +1,21 @@
 <?php 
-    $crat = "SELECT id, FirstName, LastName, created_at 
-        FROM users 
-        WHERE role='student',
+    include_once '../../includes/db_connection.php';
+
+    $query = "
+    SELECT YEAR(created_at) AS year, COUNT(id) AS users
+    FROM users
+    WHERE role = 'student'
+    GROUP BY YEAR(created_at)
+    ORDER BY YEAR(created_at)
     ";
 
-    $studCount = "SELECT COUNT(id)
-        FROM users
-        WHERE role='student'
-    ";
+$result = $conn->query($query);
 
-    $res1 = $conn->query($crat); 
-    $count = []; 
+$data = [];
 
-    while($row = $res1->fetch_assoc()){
-    array_push($data, $row); 
-
-    }
+while($row = $result->fetch_assoc()){
+    $data[] = $row;
+}
 
     echo json_encode($data); 
 ?>
