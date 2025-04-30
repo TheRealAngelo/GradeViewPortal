@@ -60,25 +60,35 @@ $schoolYear = $school_year_result->fetch_assoc()['school_year'];
                 $stmt->execute();
                 $result = $stmt->get_result();
 
-                while ($row = $result->fetch_assoc()): ?>
+                while ($row = $result->fetch_assoc()): 
+                    $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
+                    $average = round($average);
+
+                    // Determine remarks and CSS class
+                    if ($row['1stGrading'] == 0 || $row['2ndGrading'] == 0 || $row['3rdGrading'] == 0 || $row['4thGrading'] == 0) {
+                        $remarks = "IN PROCESS";
+                        $class = "in-process";
+                    } else {
+                        if ($average >= 75) {
+                            $remarks = "PASSED";
+                            $class = "passed";
+                        } else {
+                            $remarks = "FAILED";
+                            $class = "failed";
+                        }
+                    }
+                ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['subject_name']); ?></td>
                         <td><?php echo htmlspecialchars($row['1stGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['2ndGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['3rdGrading']); ?></td>
                         <td><?php echo htmlspecialchars($row['4thGrading']); ?></td>
-                        <td><?php 
-                            $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
-                            echo htmlspecialchars(round($average));
-                        ?></td>
+                        <td><?php echo htmlspecialchars($average); ?></td>
                         <td>
-                            <?php 
-                            if ($row['1stGrading'] == 0 || $row['2ndGrading'] == 0 || $row['3rdGrading'] == 0 || $row['4thGrading'] == 0) {
-                                echo 'IN PROCESS';
-                            } else {
-                                echo $average >= 75 ? 'PASSED' : 'FAIL';
-                            }
-                            ?>
+                            <span class="remarks <?php echo $class; ?>">
+                                <?php echo $remarks; ?>
+                            </span>
                         </td>
                     </tr>
                 <?php endwhile; ?>

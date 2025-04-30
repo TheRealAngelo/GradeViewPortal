@@ -58,13 +58,13 @@ $yearLevel = $details['year_level'];
                 <div class="dash-student-card">
                     <div>
                         <h2>All Students</h2>
-                        <h2>Data Privacy Policy</h2>
+                        <h2>Future Functions</h2>
                     </div>
                 </div>
                 <div class="dash-student-card">
                     <div>
                         <h2>All Students</h2>
-                        <h2>Online Classroom Learning Environment Survey</h2>
+                        <h2>Future Functions</h2>
                     </div>
                 </div>
                 <div class="student-info-box">

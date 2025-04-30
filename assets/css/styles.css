@@ -720,3 +720,22 @@ table button img {
 .announcementsContent{
     padding: 1.5rem;
 }
+.remarks {
+    color: white;
+    padding: 5px;
+    width: 100px;
+    border-radius: 3px;
+    display: inline-block;
+    text-align: center;
+}
+.remarks.passed {
+    background-color: green;
+}
+
+.remarks.failed {
+    background-color: red;
+}
+
+.remarks.in-process {
+    background-color: orange;
+}

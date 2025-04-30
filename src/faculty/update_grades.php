@@ -1,6 +1,8 @@
+<!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php
 session_start();
 include_once '../../includes/db_connection.php';
+require 'dashboardfunc.php';
 //yawg hilabta ang mga code please
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
@@ -24,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['grades'])) {
     }
 
     header("Location: dashboard.php?message=Grades updated successfully");
+    echo "update_grades.php called";
     exit();
 } else {
     echo "Invalid request.";
