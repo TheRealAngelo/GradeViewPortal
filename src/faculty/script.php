@@ -1,22 +1,26 @@
 <!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php 
-    include_once '../../includes/db_connection.php';
+include_once '../../includes/db_connection.php';
 
-    $query = "
+$query = "
     SELECT YEAR(created_at) AS year, COUNT(id) AS users
     FROM users
     WHERE role = 'student'
     GROUP BY YEAR(created_at)
     ORDER BY YEAR(created_at)
-    ";
+";
 
-$result = $conn->query($query);
+if ($stmt = $conn->prepare($query)) {
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$data = [];
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
 
-while($row = $result->fetch_assoc()){
-    $data[] = $row;
+    echo json_encode($data);
+} else {
+    echo json_encode(['error' => 'Failed to execute query']);
 }
-
-    echo json_encode($data); 
 ?>
