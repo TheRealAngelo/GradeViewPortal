@@ -1,3 +1,4 @@
+<!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php
 // Check if user is Faculty
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
@@ -12,7 +13,7 @@ $name_stmt->execute();
 $name_result = $name_stmt->get_result();
 $faculty_name = $name_result->fetch_assoc()['full_name'];
 
-// Filters
+// Pang filters
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 $filter_yearlevel = isset($_GET['yearlevel']) ? intval($_GET['yearlevel']) : 0;
 $filter_subject = isset($_GET['subject']) ? intval($_GET['subject']) : 0;
@@ -37,13 +38,13 @@ if ($filter_yearlevel > 0) {
     }
 }
 
-// Handle AJAX request for subjects
+// AJAX func for subjects
 if (isset($_GET['ajax']) && $_GET['ajax'] === 'subjects' && isset($_GET['yearlevel'])) {
     $yearlevel = intval($_GET['yearlevel']);
     $subjects = [];
 
     if ($yearlevel > 0) {
-        // Fetch subjects for the selected year level
+        // List subs for the year level
         $stmt = $conn->prepare("SELECT id, subject_name FROM subject WHERE yearlevel_id = ?");
         $stmt->bind_param("i", $yearlevel);
         $stmt->execute();
@@ -52,7 +53,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'subjects' && isset($_GET['yearlev
             $subjects[] = $row;
         }
     } else {
-        // Fetch all subjects if "All Year Levels" is selected
+        // All subjects if All Year Levels
         $result = $conn->query("SELECT id, subject_name FROM subject");
         while ($row = $result->fetch_assoc()) {
             $subjects[] = $row;
@@ -63,7 +64,7 @@ if (isset($_GET['ajax']) && $_GET['ajax'] === 'subjects' && isset($_GET['yearlev
     exit();
 }
 
-// SQL query for fetching students and grades
+// fetch students and grades
 $sql = "SELECT u.id AS student_id, CONCAT(u.LastName, ', ', u.FirstName) AS student_name, 
         s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`, g.id AS grade_id, sy.year_start, sy.year_end
         FROM grades g
@@ -86,35 +87,35 @@ if ($filter_school_year > 0) {
 }
 $sql .= " ORDER BY sy.year_start DESC, u.LastName, u.FirstName, s.subject_name";
 
-// Dynamically build the query and bind parameters
+//--query and bind parameters--//
 $params = [];
 $types = ''; // This will store the types for bind_param (e.g., 's', 'i')
 
-// Add filters to the query dynamically
+//--Add filters dynamic funcs--//
 if (!empty($search)) {
     $search_param = "%$search%";
     $params[] = $search_param;
     $params[] = $search_param;
     $params[] = $search_param;
-    $types .= 'sss'; // Three string parameters for search
+    $types .= 'sss'; 
 }
 if ($filter_yearlevel > 0) {
     $params[] = $filter_yearlevel;
-    $types .= 'i'; // Integer parameter for yearlevel
+    $types .= 'i'; 
 }
 if ($filter_subject > 0) {
     $params[] = $filter_subject;
-    $types .= 'i'; // Integer parameter for subject
+    $types .= 'i';
 }
 if ($filter_school_year > 0) {
     $params[] = $filter_school_year;
-    $types .= 'i'; // Integer parameter for school_year
+    $types .= 'i'; 
 }
 
-// Prepare the SQL statement
+// SQL statement
 $stmt = $conn->prepare($sql);
 
-// Bind parameters dynamically
+// Parameters dynamic funcs
 if (!empty($params)) {
     $stmt->bind_param($types, ...$params); // Use spread operator to pass parameters
 }
@@ -140,4 +141,5 @@ while ($row = $result->fetch_assoc()) {
     $students[$row['student_id']]['name'] = $row['student_name'];
     $students[$row['student_id']]['grades'][] = $row;
 }
+// End Parameters dynamic funcs basta mugana sha ayawg hilabti please
 ?>
