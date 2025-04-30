@@ -41,47 +41,59 @@ require 'dashboardfunc.php';
     </header>
     <div class="container">
         <?php include 'sidebar.php'; ?>
-        <div class="content noCenter">
+        <div class="content">
             <h2>Edit Students' Grades</h2>
-            <div class="searchDIV">
-                <form method="GET" action="dashboardedit.php">
-            <!--EXPORT IMPORT GRADES FUNC-->
-                </form>
+
+            <h3 style="margin-bottom: 1rem;">Import Grade File</h3>
+            <div class="bigDIV importForms">
+
                 <!-- Import Grades Form -->
-                <form method="POST" action="import_grades.php" enctype="multipart/form-data" style="display: inline;">
+                <form method="POST" action="import_grades.php" enctype="multipart/form-data" style="display: inline;">   
                     <input type="file" name="grades_file" accept=".csv" required>
-                    <button type="submit">Import Grades</button>
+                    <button type="submit">Import Grades</button> 
+                </form>
+            
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Export Student Grades</h3>
+            <div class="bigDIV exportForms">
+                <form method="GET" action="dashboardedit.php">
+                    <!--EXPORT IMPORT GRADES FUNC-->
                 </form>
                 <!-- Export Grades Form -->
                 <form method="POST" action="export_grades.php" style="display: inline;">
-                    <label for="export_yearlevel">Year Level:</label>
-                    <select name="yearlevel" id="export_yearlevel">
-                        <option value="0">All Year Levels</option>
-                        <option value="1">Grade 7</option>
-                        <option value="2">Grade 8</option>
-                        <option value="3">Grade 9</option>
-                        <option value="4">Grade 10</option>
-                    </select>
+                    <div class="exportFormsTop">
+                        <label for="export_yearlevel">Year Level:
+                            <select name="yearlevel" id="export_yearlevel">
+                                <option value="0">All Year Levels</option>
+                                <option value="1">Grade 7</option>
+                                <option value="2">Grade 8</option>
+                                <option value="3">Grade 9</option>
+                                <option value="4">Grade 10</option>
+                            </select>
+                        </label>
 
-                    <label for="export_subject">Subject:</label>
-                    <select name="subject" id="export_subject">
-                        <option value="0">All Subjects</option>
-                        <?php foreach ($subjects as $subject): ?>
-                            <option value="<?php echo $subject['id']; ?>"><?php echo htmlspecialchars($subject['subject_name']); ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                        <label for="export_subject">Subject:
+                            <select name="subject" id="export_subject">
+                                <option value="0">All Subjects</option>
+                                <?php foreach ($subjects as $subject): ?>
+                                    <option value="<?php echo $subject['id']; ?>"><?php echo htmlspecialchars($subject['subject_name']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </label>
 
-                    <label for="export_school_year">School Year:</label>
-                    <select name="school_year" id="export_school_year">
-                        <option value="0">All School Years</option>
-                        <?php
-                        $school_years = $conn->query("SELECT id, year_start, year_end FROM school_year ORDER BY year_start DESC");
-                        while ($row = $school_years->fetch_assoc()) {
-                            echo "<option value='{$row['id']}'>{$row['year_start']}-{$row['year_end']}</option>";
-                        }
-                        ?>
-                    </select>
-
+                        <label for="export_school_year">School Year:
+                            <select name="school_year" id="export_school_year">
+                                <option value="0">All School Years</option>
+                                <?php
+                                $school_years = $conn->query("SELECT id, year_start, year_end FROM school_year ORDER BY year_start DESC");
+                                while ($row = $school_years->fetch_assoc()) {
+                                    echo "<option value='{$row['id']}'>{$row['year_start']}-{$row['year_end']}</option>";
+                                }
+                                ?>
+                            </select>
+                        </label>
+                    </div>
                     <button type="submit">Export Grades</button>
                 </form>
             <!--EXPORT IMPORT GRADES FUNC-->

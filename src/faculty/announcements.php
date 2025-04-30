@@ -1,9 +1,8 @@
+<!--HTML FILE-->
 <?php
-//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 session_start();
 include_once '../../includes/db_connection.php';
 include_once 'announcementsfunc.php';
-//HTML FILE//
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,20 +17,42 @@ include_once 'announcementsfunc.php';
         <?php include 'header.php'; ?>
     </header>
     <div class="container">
-        <?php include 'sidebar.php'; ?>
-        <div class="content noCenter">
+    <div class="modalBlackbg" id="showMe">
+        <div class="modalContainer">
             <h2>Update Announcements</h2>
-            <?php if (!empty($message)): ?>
-                <p><?php echo htmlspecialchars($message); ?></p>
+        <?php if (!empty($message)): ?>
+            <p><?php echo htmlspecialchars($message); ?></p>
+            <p><?php echo htmlspecialchars($message); ?></p>
             <?php endif; ?>
             <form method="POST" action="announcements.php">
                 <input type="hidden" name="action" value="add">
                 <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required><br><br>
-                <label for="content">Content:</label><br>
-                <textarea id="content" name="content" rows="5" required></textarea><br><br>
+                <input type="text" id="title" name="title" required>
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" rows="5" required></textarea>
                 <button type="submit">Add Announcement</button>
             </form>
+        </div>
+    </div>
+            
+        <?php include 'sidebar.php'; ?>
+        <div class="content noCenter">
+        <button id="showButt" onClick="showAddAnnouncements">CLICK ME</button>
+            <script>
+                const showMeButt = document.getElementById("showButt");
+                const announcementModal = document.getElementById("showMe"); 
+
+                showMeButt.onclick = function showAddAnnouncements(){
+                    announcementModal.style.display = "flex";
+                };
+
+                window.onclick = function(event){
+                    if(event.target == announcementModal){
+                        announcementModal.style.display = "none";
+                    }
+                }
+                
+            </script>
             <h3>All Announcements</h3>
             <table>
                 <tr>
