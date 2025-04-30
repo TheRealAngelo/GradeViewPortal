@@ -53,12 +53,6 @@ $result = $conn->query($sql);
                 <?php endwhile; ?>
             </div>
             <table>
-                <tr>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Created By</th>
-                    <th>Created At</th>
-                </tr>
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr>
                         <td><?php echo htmlspecialchars($row['title']); ?></td>
