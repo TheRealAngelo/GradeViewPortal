@@ -1,4 +1,5 @@
 <?php
+//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 include '../includes/db_connection.php';
 //yawg hilabta ang mga code please
 session_start();

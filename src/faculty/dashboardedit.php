@@ -1,5 +1,5 @@
-<!--HTML FILE-->
 <?php
+//--HTML FILE--//
 session_start();
 include_once '../../includes/db_connection.php';
 require 'dashboardfunc.php';

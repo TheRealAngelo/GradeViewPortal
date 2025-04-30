@@ -1,5 +1,5 @@
-<!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php
+//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 include_once '../../includes/db_connection.php';
 
 // Get POST from the form

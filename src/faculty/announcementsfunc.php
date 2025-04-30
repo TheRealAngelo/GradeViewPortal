@@ -1,5 +1,5 @@
-<!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php
+//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 //--authentication user is Faculty--//
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
     header("Location: ../login.php");

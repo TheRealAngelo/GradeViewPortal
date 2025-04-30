@@ -1,5 +1,5 @@
-<!-- AYAWG HILABTI CONSULT GELO MUNA PLEASE-->
 <?php
+//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 session_start();
 include_once '../../includes/db_connection.php';
 require 'dashboardfunc.php';
