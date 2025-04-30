@@ -1,4 +1,3 @@
-
 <?php
 //--HTML FILE--//
 session_start();
@@ -35,6 +34,20 @@ require 'dashboardfunc.php';
                 });
         }
     </script>
+    <script>
+    function validateGradesForm(event) {
+        const inputs = document.querySelectorAll('input[type="number"]');
+        for (const input of inputs) {
+            const value = parseInt(input.value, 10);
+            if (isNaN(value) || value < 0 || value > 100) {
+                alert("Please enter a valid grade between 0 and 100.");
+                event.preventDefault();
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
 </head>
 <body>
     <header>
@@ -76,7 +89,7 @@ require 'dashboardfunc.php';
                 </form>
             </div>
             
-            <form method="POST" action="update_grades.php">
+            <form method="POST" action="update_grades.php" onsubmit="return validateGradesForm(event)">
                 <table class="noMarginTop noRoundTopLeftCorner">
                     <tr>
                         <th>Student Name</th>
