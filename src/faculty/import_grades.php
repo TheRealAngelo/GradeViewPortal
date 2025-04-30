@@ -1,5 +1,4 @@
 <?php
-// filepath: c:\xampp\htdocs\SoftwareEngineering2Final\src\faculty\import_grades.php
 include_once '../../includes/db_connection.php';
 session_start();
 
