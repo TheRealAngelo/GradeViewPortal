@@ -1,8 +1,9 @@
-<!--HTML FILE-->
 <?php
+//-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 session_start();
 include_once '../../includes/db_connection.php';
 include_once 'announcementsfunc.php';
+//HTML FILE//
 ?>
 <!DOCTYPE html>
 <html lang="en">
