@@ -37,7 +37,7 @@ $result = $conn->query($sql);
     <div class="container">
         <?php include 'sidebar.php'; ?>
         <div class="content">
-            <h2>Announcements</h2>
+            <h1 style="font-family: Mnt-bold;">Announcements</h1>
             <div class="announcements-wrapper">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <small><?php echo htmlspecialchars($row['created_at']); ?></small>

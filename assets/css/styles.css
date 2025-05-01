@@ -138,7 +138,7 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0; /* Ensure it sticks to the top */
-    z-index: 1000; /* Ensure it stays above other elements */
+    z-index: 1; /* Ensure it stays above other elements */
     width: auto;
 }
 
@@ -184,6 +184,11 @@ header {
     flex-direction: row;
     height: 100%;
     width: 100%;
+}
+
+.fadeOut{
+    opacity: 0;
+    transition: ease-in-out 0.25s;
 }
 
 .sidebar {
@@ -697,10 +702,10 @@ table button img {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
-    
 }
 
 .announcements-wrapper small{
+    font-family: Mnt;
     color: black;
     padding: 0.25rem 0.5rem;
     margin-top: 1rem;
@@ -716,26 +721,65 @@ table button img {
 
 }
 
+#text{
+    font-family: Mnt-bold;
+}
+
 .announcementsTitle{
     padding: 1.5rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.announcementsTitle p{
+    padding: 0;
+    margin: 0;
+    font-size: smaller;
+    font-family: Mnt-lightItalic;
+}
+
 .announcementsContent{
     padding: 1.5rem;
+    font-family: Mnt;
 }
 
 .modalBlackbg{
-    display: none; 
+    display: flex;
+    visibility: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.4); 
-    margin-top: -5rem; /* future dan, this adjusts the modal container to make it center */
+    margin-top: -6rem; /* future dan, this adjusts the modal container to make it center */
     z-index: 1; 
     width: 100%; 
-    height: 100vh; 
+    height: calc(100% + 0.6rem); 
     position: fixed;
+}
+
+.addConfirmation{
+    margin: auto; 
+    display: block; 
+    z-index: 6; 
+    background-color: red; 
+    width: auto; 
+    height: 10rem;
+    visibility: hidden;
+}
+
+.show{
+    visibility: visible;
+    animation: fadeIn 0.25s; 
+}
+
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modalContainer{
@@ -900,13 +944,29 @@ table button img {
 .adminDIV input{
     margin-bottom: 1rem;
     width: 30%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .adminAddName{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
+}
+
+.admin-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.admin-wrapper label{
+    margin-right: 0.5rem;
+}
+
+.admin-wrapper input{
+    width: 70%;
 }
 
 .adminAddDetails{
@@ -932,4 +992,36 @@ table button img {
     border-style: outset;
     margin-right: 6px;
     margin-left: 6px;
+}
+
+.card-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: var(--l-green);
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cards h2{
+    display: flex;
+    flex-direction: column; /* flex is important to center, or find a way to center card title*/
+    align-items: center;
+    width: 80%;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cards p{
+    margin: 0.5rem 0;
+    margin-bottom: 1.5rem;
 }

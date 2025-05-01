@@ -20,40 +20,48 @@ include_once 'announcementsfunc.php';
     <div class="modalBlackbg" id="showMe">
         <div class="modalContainer">
             <h2>Update Announcements</h2>
-        <?php if (!empty($message)): ?>
-            <p><?php echo htmlspecialchars($message); ?></p>
-            <p><?php echo htmlspecialchars($message); ?></p>
-            <?php endif; ?>
+            <!-- Balik lang ang question mark sa start for debuggin -->
+            <!--<php if (!empty($message)): ?>
+            <p><php echo $message; ?></p>
+            <php endif; ?> -->
             <form method="POST" action="announcements.php">
                 <input type="hidden" name="action" value="add">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
                 <label for="content">Content:</label>
                 <textarea id="content" name="content" rows="5" required></textarea>
-                <button type="submit">Add Announcement</button>
-            </form>
+                <button id="addButt" onClick="addingAnnouncement" type="submit">Add Announcement</button>
+            </form>  
         </div>
     </div>
             
         <?php include 'sidebar.php'; ?>
         <div class="content noCenter">
-        <button id="showButt" onClick="showAddAnnouncements">CLICK ME</button>
+        <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
+            <h1 style="margin-bottom: 1rem; ">All Announcements</h1>
+            <button style="height: 1.75rem;  
+                background-color: white;
+                border-radius: 2rem;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: ease-in-out 0.15s;
+                font-family: Mnt;" id="showButt" onClick="showAddAnnouncements"><img style="margin: auto; height: 1rem;" src="../../assets/icons/icons8-plus-24.png"></button>
+        </div>
             <script>
                 const showMeButt = document.getElementById("showButt");
                 const announcementModal = document.getElementById("showMe"); 
 
                 showMeButt.onclick = function showAddAnnouncements(){
-                    announcementModal.style.display = "flex";
+                    announcementModal.classList.toggle("show")
                 };
 
                 window.onclick = function(event){
                     if(event.target == announcementModal){
-                        announcementModal.style.display = "none";
+                        announcementModal.classList.remove("show");
                     }
                 }
                 
             </script>
-            <h3>All Announcements</h3>
             <table>
                 <tr>
                     <th>Title</th>
