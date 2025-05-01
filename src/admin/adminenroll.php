@@ -25,7 +25,7 @@ include 'enroll.php';
             <?php endif; ?>
             <div class="adminDIV">
                 <form method="POST" action="adminenroll.php">
-                <label style="vertical-align: middle" for="yearlevel_id">Year Level:</label>
+                <label style="vertical-align: middle" for="yearlevel_id">Year level to enroll too:</label>
                 <select style="font-family: Mnt-lightEx; padding: 0.25rem; border-radius: 0.5rem; border: 1.5px solid rgba(0, 0, 0, 0.2); border-style: outset; margin-right: 6px;" id="yearlevel_id" name="yearlevel_id" required>
                     <option value="1">Grade 7</option>
                     <option value="2">Grade 8</option>
@@ -45,7 +45,7 @@ include 'enroll.php';
                         </tr>
                     <?php endwhile; ?>
                 </table>
-                <button type="submit" name="enroll_students">Enroll Selected Students</button>
+                <button type="submit" name="enroll_students"onclick="window.location.reload();">Enroll Selected Students</button>
                 </form>
             </div>
 

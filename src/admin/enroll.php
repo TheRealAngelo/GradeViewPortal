@@ -54,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enroll_students'])) {
 
         $grade_stmt->close();
         $subject_stmt->close();
-        $message = "Selected students have been successfully enrolled and grades have been created!";
-    } else {
-        $message = "Please select at least one student to enroll.";
+        echo "<script>alert('Selected students have been successfully enrolled and grades have been created!');</script>";
+        } else {
+        echo "<script>alert('Please select at least one student to enroll.');</script>";
     }
 }
 ?>
