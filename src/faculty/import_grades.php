@@ -23,6 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['grades_file'])) {
         $fourth_grading = intval($row[5]);
         $school_year = trim($row[6]);
 
+        //--Validate grades--//
+        $grades = [$first_grading, $second_grading, $third_grading, $fourth_grading];
+        foreach ($grades as $grade) {
+            if (!is_numeric($grade) || $grade < 0 || $grade > 100) {
+                fclose($handle);
+                die("<script>
+                        alert('Import Unsuccessful: Invalid input');
+                        window.location.href = 'dashboardedit.php';
+                    </script>");
+            }
+        }
+            
         //-- Student from database--//
         $student_stmt = $conn->prepare("SELECT id FROM users WHERE CONCAT(LastName, ', ', FirstName) = ?");
         $student_stmt->bind_param("s", $student_name);
@@ -60,8 +72,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['grades_file'])) {
     }
 
     fclose($handle);
-    echo "Grades imported successfully!";
-    header("Location: dashboard.php");
+    //echo "Grades imported successfully!";
+    //header("Location: dashboardedit.php");
+    echo "<script>
+            alert('Grades imported Successfully!');
+            window.location.href = 'dashboardedit.php';
+          </script>";
     exit();
 }
 ?>
