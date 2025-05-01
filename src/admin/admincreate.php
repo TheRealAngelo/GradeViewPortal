@@ -22,19 +22,25 @@ include 'create.php';
                 
                     <form method="POST" action="admincreate.php">
                         <div class="adminAddName">
-                            <label for="first_name">First Name:</label>
-                            <input type="text" id="first_name" name="first_name" required>
-
-                            <label for="last_name">Last Name:</label>
-                            <input type="text" id="last_name" name="last_name" required>
+                            <div class="admin-wrapper">
+                                <label for="first_name">First Name:</label>
+                                <input type="text" id="first_name" name="first_name" required>
+                            </div>
+                            <div class="admin-wrapper">
+                                <label for="last_name">Last Name:</label>
+                                <input type="text" id="last_name" name="last_name" required>
+                            </div>
                         </div>
 
                         <div class="adminAddDetails">
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="username" required>
-
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" required>
+                            <div class="admin-wrapper">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div class="admin-wrapper">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
                         </div>
 
                         <div class="adminAddRole">
