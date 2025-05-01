@@ -33,9 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insert_stmt->bind_param("sssss", $username, $hashedPassword, $role, $first_name, $last_name);
 
             if ($insert_stmt->execute()) {
-                $message = "User added successfully!";
+                echo "<script>alert('User added successfully!');</script>";
+                //$message = "User added successfully!";
             } else {
-                $message = "Error: " . $insert_stmt->error;
+                echo "<script>alert('Error: " . addslashes($insert_stmt->error) . "');</script>";
+                //$message = "Error: " . $insert_stmt->error;
             }
 
             $insert_stmt->close();

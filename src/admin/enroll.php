@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enroll_students'])) {
         $grade_stmt = $conn->prepare("INSERT INTO grades (student_id, subject_id, `1stGrading`, `2ndGrading`, `3rdGrading`, `4thGrading`, yearlevel_id, school_year_id, created_by) VALUES (?, ?, 0, 0, 0, 0, ?, ?, ?)");
 
         foreach ($selected_students as $student_id) {
-            // Check if the student already has grades for the current school year
+            // check student enrollment
             $check_grade_sql = "SELECT COUNT(*) AS grade_count FROM grades WHERE student_id = ? AND school_year_id = ?";
             $check_grade_stmt = $conn->prepare($check_grade_sql);
             $check_grade_stmt->bind_param("ii", $student_id, $current_school_year_id);
@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enroll_students'])) {
             $grade_count = $check_grade_result->fetch_assoc()['grade_count'];
 
             if ($grade_count > 0) {
-                // Skip this student if they already have grades for the current school year
                 continue;
             }
 
@@ -57,6 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enroll_students'])) {
         echo "<script>alert('Selected students have been successfully enrolled and grades have been created!');</script>";
         } else {
         echo "<script>alert('Please select at least one student to enroll.');</script>";
+
+        //ito rin u can also use inpage/in-div message
+        // $message = "Selected students have been successfully enrolled and grades have been created!"; 
+        //} else {
+        //$message = "Please select at least one student to enroll.";//
+
     }
 }
 ?>
