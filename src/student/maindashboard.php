@@ -148,45 +148,47 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
         <?php include 'sidebar.php'; ?> 
 
         <div class="content">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-                <h1 style="width: fit-content;"><?php echo htmlspecialchars($student_name); ?></h1>
-                <h3 style="width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
-                <small style="width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></small>
+            <div style="padding-left: 2rem;" class="bigDIV">
+            <div style="display: flex; flex-direction: column;">
+                <h1 style="font-family: Mnt-black ; width: fit-content;"><?php echo htmlspecialchars($student_name); ?></h1>
+                <h3 style="font-family: Mnt; margin-bottom: 0.25rem ; margin-top:0; width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
+                <small style="font-family: Mnt-light; width: fit-content; margin-bottom: 1rem">Year Level: <?php echo htmlspecialchars($yearLevel); ?></small>
             </div>
 
             <div style="width: 100%;">
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
-                        <div>
+                        <div class="carding">
                             <h2>Grade Status</h2>
-                            <h2><?php echo htmlspecialchars($grades_status); ?></h2>
+                            <p class="carding" style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars($grades_status); ?></p>
                         </div>
                     </div>
                 </a>
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
-                        <div>
+                        <div class="carding">
                             <h2>Top Performing</h2>
-                            <h2><?php echo htmlspecialchars(implode(', ', $top_subjects)); ?></h2>
+                            <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars(implode(', ', $top_subjects)); ?></p>
                         </div>
                     </div>
                 </a>
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
-                        <div>
+                        <div class="carding">
                             <h2>Lowest Performing</h2>
-                            <h2><?php echo htmlspecialchars(implode(', ', $lowest_subjects)); ?></h2>
+                            <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars(implode(', ', $lowest_subjects)); ?></p>
                         </div>
                     </div>
                 </a>
                 <a href="announcements.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
-                        <div>
+                        <div class="carding">
                             <h2>Latest Announcement</h2>
-                            <h2><?php echo '" ' . htmlspecialchars($announcement_title) . ' " ' . ' Created by: ' . htmlspecialchars($announcement_creator); ?></h2>
+                            <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo '" ' . htmlspecialchars($announcement_title) . ' " ' . ' Created by: ' . htmlspecialchars($announcement_creator); ?></p>
                         </div>
                     </div>
-                </div>
+                </a>
+            </div>
                 <div class="student-info-box">
                     <p>For any concerns regarding your assessment, please visit the Cashier Office or contact them at 0999-999-9999.</p>
                 </div>

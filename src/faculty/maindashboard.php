@@ -21,24 +21,26 @@ include 'maindashboardfunc.php';
     <div class="container">
         <?php include 'sidebar.php'; ?>
         <div class="content content-dashboard noCenter">
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: max-content; width: 100%; font-style: bold;">
+            <div style="display: flex; flex-direction: column; justify-content: center; height: max-content; width: 100%; font-style: bold;">
                 <h2 style="width: 100%; margin-bottom: 2rem;">School Year <?php echo htmlspecialchars($school_year); ?></h2>
                 <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
-                        <h3>Enrolled Students</h3>
+                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Enrolled Students</h3>
                         <p><?php echo $student_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
-                        <h3>Total Faculty</h3>
+                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Total Faculty</h3>
                         <p><?php echo $faculty_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
-                        <h3>Total Announcements</h3>
+                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Total Announcements</h3>
                         <p><?php echo $announcement_count; ?></p>
                     </div>
                 </div>
-                <h2 style="width: 100%; margin-bottom: 2rem;">Number of students per Year</h2>
-                <div style="width: 100%; height: 100%;">
+
+
+                <h2 style="width: 100%; margin-top: 4rem; margin-bottom: 2rem;">Number of students per Year</h2>
+                <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 50%;">
                     <canvas id="myChart"></canvas>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -63,8 +65,8 @@ include 'maindashboardfunc.php';
                                     label: '# of Students',
                                     data: chartData.map(row => row.users),
                                     borderWidth: 1,
-                                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                                    borderColor: 'rgba(54, 162, 235, 1)'
+                                    backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                                    borderColor: 'rgb(0, 235, 0)'
                                 }]
                             },
                             options: {
