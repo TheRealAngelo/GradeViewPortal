@@ -3,6 +3,25 @@
 session_start();
 include_once '../../includes/db_connection.php';
 require 'dashboardfunc.php';
+
+if (isset($_GET['ajax']) && $_GET['ajax'] === 'subjects' && isset($_GET['yearlevel'])) {
+    $yearlevel = intval($_GET['yearlevel']);
+    $subjects = [];
+
+    if ($yearlevel > 0) {
+        // Fetch subjects for the selected year level
+        $stmt = $conn->prepare("SELECT id, subject_name FROM subject WHERE yearlevel_id = ?");
+        $stmt->bind_param("i", $yearlevel);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $subjects[] = $row;
+        }
+    }
+
+    echo json_encode($subjects);
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +32,11 @@ require 'dashboardfunc.php';
     <link rel="stylesheet" href="../../assets/css/styles.css">
     <script>
         function updateSubjects(yearLevelId) {
-            const subjectDropdown = document.getElementById('subject');
+            const subjectDropdown = document.getElementById('export_subject');
             subjectDropdown.innerHTML = '<option value="0">Loading...</option>'; // Show loading state
 
             // Fetch subjects dynamically based on the selected year level
-            fetch(`dashboard.php?ajax=subjects&yearlevel=${yearLevelId}`)
+            fetch(`dashboardedit.php?ajax=subjects&yearlevel=${yearLevelId}`)
                 .then(response => response.json())
                 .then(data => {
                     subjectDropdown.innerHTML = '<option value="0">All Subjects</option>'; // Reset options
@@ -64,7 +83,7 @@ require 'dashboardfunc.php';
                 <form method="POST" action="export_grades.php" style="display: inline;">
                     <div class="exportFormsTop">
                         <label for="export_yearlevel">Year Level:
-                            <select name="yearlevel" id="export_yearlevel">
+                            <select name="yearlevel" id="export_yearlevel" onchange="updateSubjects(this.value)">
                                 <option value="0">All Year Levels</option>
                                 <option value="1">Grade 7</option>
                                 <option value="2">Grade 8</option>
