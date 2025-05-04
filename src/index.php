@@ -21,29 +21,26 @@
         }
         .container {
             max-width: 800px;
-            background-color: rgba(0, 0, 0, 0.7); /* Translucent black background */
+            background-color: rgba(0, 0, 0, 0.7); 
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
         h1 {
-            color:rgb(255, 255, 255); /* Light green for the heading */
+            color:rgb(255, 255, 255); 
             margin-bottom: 20px;
         }
-        /* General styles for <p> */
         p {
             color: #ddd;
             line-height: 1.6;
             margin-bottom: 20px;
         }
-
-        /* Button-specific styles */
         a.button {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background: linear-gradient(to right, #32cd32, #228b22); /* Light green to green gradient */
+            background: linear-gradient(to right, #32cd32, #228b22); 
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -52,10 +49,10 @@
         }
 
         a.button:hover {
-            background: linear-gradient(to right, #228b22, #006400); /* Darker green on hover */
+            background: linear-gradient(to right, #228b22, #006400); 
         }
 
-        /* Style for the "By: ADHD" link to look like normal text */
+        /* Press "By: ADHD"*/
         p a {
             text-decoration: none;
             color: inherit;
@@ -63,13 +60,13 @@
         }
     </style>
     <script>
-        // JavaScript to change the background image dynamically
+        // Future Idea make changing background picture
         document.addEventListener("DOMContentLoaded", function () {
             const images = [
                 "sva-blur-bg.png"
-            ]; // Add your image filenames here
+            ]; // Example dan: "image1.png" . "image2.png" . "etc.png"
             const randomImage = images[Math.floor(Math.random() * images.length)];
-            document.body.style.backgroundImage = `url('../assets/images/${randomImage}')`; // Adjust the path to your images folder
+            document.body.style.backgroundImage = `url('../assets/images/${randomImage}')`;
         });
     </script>
 </head>
