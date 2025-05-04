@@ -168,14 +168,16 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
             <div style="width: 100%;">
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
+                    <img src="../../assets/icons/icons8-whiteAssessment-100.png" alt="User Icon" style="width: auto; height: 1.5rem;">
                         <div class="carding">
                             <h2>Grade Status</h2>
-                            <p class="carding" style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars($grades_status); ?></p>
+                            <p class="carding" style="font-size: 20px; margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars($grades_status); ?></p>
                         </div>
                     </div>
                 </a>
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
+                    <img src="../../assets/icons/icons8-whiteAssessment-100.png" alt="User Icon" style="width: auto; height: 1.5rem;">
                         <div class="carding">
                             <h2>Top Performing</h2>
                             <p style="margin-bottom: 0; margin-left: 1.5rem;">
@@ -188,6 +190,7 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
                 </a>
                 <a href="dashboard.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
+                    <img src="../../assets/icons/icons8-whiteAssessment-100.png" alt="User Icon" style="width: auto; height: 1.5rem;">
                         <div class="carding">
                             <h2>Lowest Performing</h2>
                             <p style="margin-bottom: 0; margin-left: 1.5rem;">
@@ -200,6 +203,7 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
                 </a>
                 <a href="announcements.php" style="text-decoration: none; color: inherit;">
                     <div class="dash-student-card">
+                    <img src="../../assets/icons/icons8-whiteAnnouncement-100.png" alt="User Icon" style="width: auto; height: 1.5rem;">
                         <div class="carding">
                             <h2>Latest Announcement</h2>
                             <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo '" ' . htmlspecialchars($announcement_title) . ' " ' . ' Created by: ' . htmlspecialchars($announcement_creator); ?></p>
