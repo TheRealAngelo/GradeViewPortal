@@ -16,7 +16,7 @@
         </ul>
         <script src="sidebar.js"></script>
 
-        <form method="POST" action="../logout.php">
+        <form method="POST" action="../login/logout.php">
             <button type="submit" class="logout"><img src="../../assets/icons/icons8-log-out-90.png">Logout</button>
         </form>
     </div>

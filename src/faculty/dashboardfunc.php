@@ -2,7 +2,7 @@
 //-- AYAWG HILABTI CONSULT GELO MUNA PLEASE--//
 // Check if user is Faculty
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
-    header("Location: ../login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 

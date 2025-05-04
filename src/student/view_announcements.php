@@ -4,7 +4,7 @@
  
  // checkniya kung user kai student
  if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
-     header("Location: ../login.php");
+     header("Location: ../login/login.php");
      exit();
  }
  

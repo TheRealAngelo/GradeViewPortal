@@ -3,7 +3,7 @@ let timeout;
 function resetTimeout() {
     clearTimeout(timeout); 
     timeout = setTimeout(() => {
-        window.location.href = "/SoftwareEngineering2Final/src/logout.php";
+        window.location.href = "/SoftwareEngineering2Final/src/login/logout.php";
     }, 600000); //(milliseconds)
 }
 

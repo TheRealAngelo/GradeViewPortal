@@ -16,7 +16,7 @@ $timeout_duration = 180; //(seconds)
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
-    header("Location: /SoftwareEngineering2Final/src/logout.php");
+    header("Location: /SoftwareEngineering2Final/src/login/logout.php");
     exit();
 }
 

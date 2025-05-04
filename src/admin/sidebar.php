@@ -13,7 +13,7 @@
             <li><a href="adminenroll.php" class="active"><img src="../../assets/icons/icons8-assessment-100.png">Enroll Students</a></li>
             <li><a href="admincreate.php" class="active"><img src="../../assets/icons/icons8-assessment-100.png">Add User</a></li>
         </ul>
-        <form method="POST" action="../logout.php">
+        <form method="POST" action="../index.php">
             <button type="submit" class="logout"><img src="../../assets/icons/icons8-log-out-90.png">Logout</button>
         </form>
     </div>

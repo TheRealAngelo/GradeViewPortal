@@ -4,7 +4,7 @@ include('../includes/db_connection.php');
 
 // kani sad Ayawg hilabti thanks
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 

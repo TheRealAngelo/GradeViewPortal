@@ -6,7 +6,7 @@ require 'dashboardfunc.php';
 //yawg hilabta ang mga code please
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'faculty') {
-    header("Location: ../login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 

@@ -4,7 +4,7 @@ include_once '../../includes/db_connection.php';
 
 // monkey terms: student user so user in dashboard
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
-    header("Location: ../login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 
