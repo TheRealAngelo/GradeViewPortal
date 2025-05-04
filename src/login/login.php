@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../includes/db_connection.php';
+include_once '../../includes/db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
@@ -28,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // e direct niya si user based sa role niya
                 if ($row['role'] == 'faculty') {
-                    header("Location: faculty/maindashboard.php");
+                    header("Location: ../faculty/maindashboard.php");
                 } elseif ($row['role'] == 'student') {
-                    header("Location: student/maindashboard.php");
+                    header("Location: ../student/maindashboard.php");
                 }
                 exit();
             } else {
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 <body>
     <style>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 100%;
             margin: 0;
             padding: 0; 
-            background-image: url("../assets/images/sva-blur-bg.png");
+            background-image: url("../../assets/images/sva-blur-bg.png");
             background-size: cover; 
             background-repeat: no-repeat; 
             background-position: center center;
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="login-wrapper">
         <div class="login-container">
             <div class="login-img-container">
-                <img src="../assets/images/SVA_logo.png">
+                <img src="../../assets/images/SVA_logo.png">
             </div>
             <div class="login-inputs-things">
                 <h1>Grade View Portal</h1>
@@ -89,6 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-    <script src="../assets/js/scripts.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
 </body>
 </html>
