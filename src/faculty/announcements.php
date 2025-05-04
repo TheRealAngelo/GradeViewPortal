@@ -39,13 +39,7 @@ include_once 'announcementsfunc.php';
         <div class="content noCenter">
         <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%;">
             <h1 style="margin-bottom: 1rem; ">All Announcements</h1>
-            <button style="height: 1.75rem;  
-                background-color: white;
-                border-radius: 2rem;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-                transition: ease-in-out 0.15s;
-                font-family: Mnt;" id="showButt" onClick="showAddAnnouncements"><img style="margin: auto; height: 1rem;" src="../../assets/icons/icons8-plus-24.png"></button>
+            <button class="addButt" id="showButt" onClick="showAddAnnouncements"><img style="margin: auto; height: 1rem;" src="../../assets/icons/icons8-plus-24.png"></button>
         </div>
             <script>
                 const showMeButt = document.getElementById("showButt");

@@ -412,6 +412,19 @@ ul li a:hover{
     align-items: normal;
 }
 
+.addButt{
+    height: 1.75rem;  
+    background-color: white;
+    border-radius: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: ease-in-out 0.15s;
+}
+
+.addbutt:hover{
+    transform: scale(1.02);
+}
+
 .content form input, textarea{
     padding: 0.25rem;
     border-radius: 0.5rem;
@@ -631,13 +644,12 @@ table button img {
 }
 
 .dash-student-card {
-    background-color: #16423C;
-    color: white;
+    color: black;
     padding: 20px;
-    border-radius: 10px;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .dash-student-card h2 {
@@ -667,13 +679,16 @@ table button img {
 
 .dash-faculty-stats {
     display: flex;
-    gap: 20px; /* Add space between the cards */
+    gap: 20px; 
     margin-top: 20px;
-    justify-content: center; /* Center the cards horizontally */
+    justify-content: flex-start; /* Center the cards horizontally */
     flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .dash-faculty-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--green); /* Light green background */
     padding: 20px;
     border-radius: 10px;
@@ -884,6 +899,20 @@ table button img {
     margin-bottom: 2rem;
     border-radius: 1rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bigDIV h2, a{
+    cursor: default;
+}
+
+.bigDIV .carding p{
+    font-family: Mnt;
+    transition: 0.25s ease-in-out;
+}
+
+.bigDIV .carding p:hover{
+    transform: translateX(0.10rem);
+    font-family: Mnt-Italic;
 }
 
 .importForms button{
