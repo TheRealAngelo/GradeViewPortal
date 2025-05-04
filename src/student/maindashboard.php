@@ -100,6 +100,11 @@ $lowest_avg = 101;
 while ($row = $grades_result->fetch_assoc()) {
     $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
 
+    // Skip subjects with an average of 0
+    if ($average == 0) {
+        continue;
+    }
+
     // Check for top-performing subjects
     if ($average > $highest_avg) {
         $highest_avg = $average;
@@ -115,6 +120,11 @@ while ($row = $grades_result->fetch_assoc()) {
     } elseif ($average == $lowest_avg) {
         $lowest_subjects[] = $row['subject_name']; // Add to the list of lowest subjects
     }
+}
+
+// Ensure lowest-performing subjects are not the same as top-performing subjects
+if (!empty(array_intersect($top_subjects, $lowest_subjects))) {
+    $lowest_subjects = []; // Clear the lowest-performing subjects if they overlap with top-performing
 }
 
 // Fetch the latest announcement and its creator
