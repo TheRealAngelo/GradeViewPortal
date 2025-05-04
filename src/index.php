@@ -74,7 +74,7 @@
     <div class="container">
         <h1>San Vicente Academy Grade View System</h1>
         <p style="margin-bottom: 20px;">
-            <a href="http://localhost/SoftwareEngineering2Final/src/admin/dashboard.php" style="text-decoration: none; color: inherit; cursor: default;">By: ADHD</a>
+            <a href="admin/dashboard.php" style="text-decoration: none; color: inherit; cursor: default;">By: ADHD</a>
         </p>
         <p>
             The Grade View System for San Vicente Academy is a web-based platform designed to streamline academic communication between the faculty and students. This system provides a centralized and secure environment where faculty members can efficiently create and update student grades as well as post important announcements.
