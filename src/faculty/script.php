@@ -3,11 +3,12 @@
 include_once '../../includes/db_connection.php';
 
 $query = "
-    SELECT YEAR(created_at) AS year, COUNT(id) AS users
-    FROM users
-    WHERE role = 'student'
-    GROUP BY YEAR(created_at)
-    ORDER BY YEAR(created_at)
+    SELECT YEAR(g.created_at) AS year, COUNT(DISTINCT u.id) AS users
+    FROM users u
+    INNER JOIN grades g ON u.id = g.student_id
+    WHERE u.role = 'student'
+    GROUP BY YEAR(g.created_at)
+    ORDER BY YEAR(g.created_at)
 ";
 
 if ($stmt = $conn->prepare($query)) {
