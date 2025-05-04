@@ -686,7 +686,12 @@ table button img {
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    gap: 12px;
+    background-color: var(--d-green);
+    color: white;
+    border-radius: 1rem;
 }
+
 
 .dash-student-card h2 {
     margin: 0;
@@ -988,14 +993,23 @@ table button img {
     cursor: default;
 }
 
+.carding h2{
+    font-family: Mnt-lightEx;
+    font-size: 14px;
+}
+
 .bigDIV .carding p{
-    font-family: Mnt;
+    font-family: Mnt-bold;
     transition: 0.25s ease-in-out;
+
+    font-size: 20px; 
+    margin-bottom: 0; 
+    margin-left: 1.5rem;
 }
 
 .bigDIV .carding p:hover{
     transform: translateX(0.10rem);
-    font-family: Mnt-Italic;
+    font-family: Mnt-boldItalic;
 }
 
 .importForms button{
