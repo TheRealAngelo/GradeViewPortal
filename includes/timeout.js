@@ -3,7 +3,7 @@ let timeout;
 function resetTimeout() {
     clearTimeout(timeout); 
     timeout = setTimeout(() => {
-        window.location.href = "../../login/logout.php"; // Use relative path
+        window.location.href = "../login/logout.php"; // Use relative path
     }, 600000); //(milliseconds)
 }
 
