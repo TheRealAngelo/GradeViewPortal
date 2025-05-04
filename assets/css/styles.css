@@ -164,6 +164,42 @@ header {
     margin-right: 1.5rem;
 }
 
+.header-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: 1rem;
+    z-index: 1;
+}
+
+.header-right button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    width: max-content;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    transition: ease-in-out 0.25s;
+}
+
+.header-right button:hover{
+    background-color: transparent;
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.header-right img {
+    width: auto;
+    height: 2rem;
+}
+
 .header-right h1{
     padding: 0;
     margin: 0;
@@ -795,6 +831,53 @@ table button img {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.settings-modal{
+    display: none;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    position: absolute;
+    width: max-content;
+    border-radius: 1rem;
+    box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem 1.5rem;
+    height: auto;
+    top: 60px;
+    right: 215px;
+    color:black;
+    background-color: white;
+    z-index: 100;
+}
+
+.settings-modal h6, p{
+    margin: 0;
+}
+
+.settings-modal h6{
+    font-family: Mnt-med;
+    font-size: 12px;
+}
+
+.settings-modal p{
+    font-size: smaller;
+    font-family: Mnt-lightEx;
+    font-size: 14px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: 1px;
+}
+
+.settings-modal p:hover{
+    cursor: pointer;
+    color:#333
+}
+
+.settings-modal.show {
+    display: flex; /* Show the modal */
+    visibility: visible;
 }
 
 .modalContainer{
