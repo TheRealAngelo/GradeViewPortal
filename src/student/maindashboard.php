@@ -178,7 +178,11 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
                     <div class="dash-student-card">
                         <div class="carding">
                             <h2>Top Performing</h2>
-                            <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars(implode(', ', $top_subjects)); ?></p>
+                            <p style="margin-bottom: 0; margin-left: 1.5rem;">
+                                <?php 
+                                echo !empty($top_subjects) ? htmlspecialchars(implode(', ', $top_subjects)) : ' Grades On Process'; 
+                                ?>
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -186,7 +190,11 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
                     <div class="dash-student-card">
                         <div class="carding">
                             <h2>Lowest Performing</h2>
-                            <p style="margin-bottom: 0; margin-left: 1.5rem;"><?php echo htmlspecialchars(implode(', ', $lowest_subjects)); ?></p>
+                            <p style="margin-bottom: 0; margin-left: 1.5rem;">
+                                <?php 
+                                echo !empty($lowest_subjects) ? htmlspecialchars(implode(', ', $lowest_subjects)) : ' Grades On Process'; 
+                                ?>
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -200,7 +208,7 @@ $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
                 </a>
             </div>
                 <div class="student-info-box">
-                    <p>For any concerns regarding your assessment, please visit the Cashier Office or contact them at 0999-999-9999.</p>
+                    <p>For any concerns regarding your grade assessment, please visit the Registrar Office or contact them at 0999-999-9999.</p>
                 </div>
             </div>
         </div>
