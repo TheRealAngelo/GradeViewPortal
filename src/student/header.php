@@ -146,7 +146,7 @@
 
         .modal-content form button {
             padding: 0.5rem;
-            background-color: #007bff;
+            background-color:rgb(21, 105, 46);
             /* change color here */
             color: white;
             border: none;
@@ -156,7 +156,7 @@
         }
 
         .modal-content form button:hover {
-            background-color: #0056b3;
+            background-color:rgb(21, 105, 46);
             /* change color here */
         }
     </style>
