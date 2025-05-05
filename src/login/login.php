@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($username) || empty($password)) {
         $error = "Username and password are required.";
     } else {
-      
+
         $stmt = $conn->prepare("SELECT id, password, role FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             // verify hashbrowns
             if (password_verify($password, $row['password'])) {
-                
+
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $row['role'];
@@ -47,25 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
+
 <body>
     <style>
-        html{
+        html {
             height: 100%;
             margin: 0;
-            padding: 0; 
+            padding: 0;
             background-image: url("../../assets/images/sva-blur-bg.png");
-            background-size: cover; 
-            background-repeat: no-repeat; 
+            background-size: cover;
+            background-repeat: no-repeat;
             background-position: center center;
-        } 
-        body{
-            background-color: transparent; 
+        }
+
+        body {
+            background-color: transparent;
         }
     </style>
     <div class="login-wrapper">
@@ -74,8 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <img src="../../assets/images/SVA_logo.png">
             </div>
             <div class="login-inputs-things">
-                <h1>Grade View Portal</h1>
-                <h2>SIGN IN</h2>
+                <div class="login-title">
+                    <h1>Grade View Portal</h1>
+                    <small>SIGN IN</small>
+                </div>
                 <div class="login-container-inputs">
                     <form method="POST" action="">
                         <input type="text" id="username" name="username" placeholder="Username" required>
@@ -91,4 +96,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <script src="../../assets/js/scripts.js"></script>
 </body>
+
 </html>
