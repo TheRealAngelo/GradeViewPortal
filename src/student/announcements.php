@@ -40,13 +40,11 @@ $result = $conn->query($sql);
             <h1 style="font-family: Mnt-bold;">Announcements</h1>
             <div class="announcements-wrapper">
                 <?php while ($row = $result->fetch_assoc()): ?>
+                    <small><?php echo htmlspecialchars($row['created_at']); ?></small>
                 <div class="announcementsDIV">
                     <div class="announcementsTitle">
-                        <div class="announcementsTitle-left">
-                            <h2><?php echo htmlspecialchars($row['title']); ?> </h2>
-                            <p><?php echo htmlspecialchars($row['created_by']); ?><br></p>
-                        </div>
-                        <small><?php echo htmlspecialchars($row['created_at']); ?></small>
+                        <?php echo htmlspecialchars($row['title']); ?><br>
+                        <p style="margin: 0.5rem 0">By: <?php echo htmlspecialchars($row['created_by']); ?><br></p>
                     </div>
                     <div class="announcementsContent">
                         <?php echo htmlspecialchars($row['content']); ?>
