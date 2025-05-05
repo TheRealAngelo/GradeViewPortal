@@ -326,6 +326,23 @@ ul li a:hover{
     border-bottom-left-radius: 1rem;
 }
 
+.login-title{
+    width: 100%;
+
+}
+
+.login-title h1{
+    font-family: Mnt-bold;
+    font-size: 37px;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.login-title small{
+    font-family: Mnt-med;
+    margin-top: 0;
+}
+
 .login-container img{
     padding: 0; 
     height: 20rem;
@@ -866,7 +883,7 @@ table button img {
     text-align: left;
     padding: 1rem 1.5rem;
     height: auto;
-    top: 0;
+    top: 100%;
     left: 0;
     right: 220px;
     color:black;
