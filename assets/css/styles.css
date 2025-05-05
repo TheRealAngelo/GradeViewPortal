@@ -850,7 +850,7 @@ table button img {
 @keyframes fadeIn{
     from{
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(-30px);
     }
     to{
         opacity: 1;
@@ -868,7 +868,7 @@ table button img {
     height: auto;
     top: 0;
     left: 0;
-    right: 215px;
+    right: 220px;
     color:black;
     position: fixed;
     width: 100%;
@@ -910,9 +910,10 @@ table button img {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    top: 60px;
-    right: 220px;
-    position: fixed;
+    top: 45px;
+    right: auto;
+    left: 1130px;
+    position: relative;
     background-color: white;
     padding: 1rem 1.5rem;
     border-radius: 0.5rem;
