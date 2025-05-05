@@ -21,7 +21,7 @@ include 'maindashboardfunc.php';
         <?php include 'sidebar.php'; ?>
 
         <div class="content">
-            <div style="padding-left: 2rem;" class="bigDIV">
+            <div class="bigDIV">
                 <div style="display: flex; flex-direction: column;">
                     <h1 style="font-family: Mnt-black ; width: fit-content;"><?php echo htmlspecialchars($student_name); ?></h1>
                     <h3 style="font-family: Mnt; margin-bottom: 0.25rem ; margin-top:0; width: fit-content">School Year: <?php echo htmlspecialchars($schoolYear); ?></h3>
