@@ -1,18 +1,29 @@
 <?php
-// Check if the user is a student
+// Check user student
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
     header("Location: ../login/login.php");
     exit();
 }
 
-// Fetch the student's full name
+// student full name
 $name_stmt = $conn->prepare("SELECT CONCAT(LastName, ', ', FirstName) AS full_name FROM users WHERE id = ?");
 $name_stmt->bind_param("i", $_SESSION['user_id']);
 $name_stmt->execute();
 $name_result = $name_stmt->get_result();
 $student_name = $name_result->fetch_assoc()['full_name'];
 
-// Fetch the current school year and year level
+// school year
+$current_sy_stmt = $conn->prepare("
+    SELECT CONCAT(year_start, '-', year_end) AS school_year
+    FROM school_year
+    ORDER BY year_start DESC
+    LIMIT 1
+");
+$current_sy_stmt->execute();
+$current_sy_result = $current_sy_stmt->get_result();
+$current_school_year = $current_sy_result->fetch_assoc()['school_year'] ?? 'No School Year Available';
+
+// student year level for the current school year
 $details_stmt = $conn->prepare("
     SELECT 
         CONCAT(sy.year_start, '-', sy.year_end) AS school_year,
@@ -28,103 +39,96 @@ $details_stmt->execute();
 $details_result = $details_stmt->get_result();
 $details = $details_result->fetch_assoc();
 
-$schoolYear = $details['school_year'];
-$yearLevel = $details['year_level'];
+$schoolYear = $current_school_year; // Always display the current school year
+$yearLevel = $details['year_level'] ?? "Student Not Enrolled";
 
-// Count grades that are still "in process" (any grading column is 0)
-$in_process_stmt = $conn->prepare("
-    SELECT COUNT(*) AS in_process_count
-    FROM grades
-    WHERE student_id = ? AND (
-        `1stGrading` = 0 OR 
-        `2ndGrading` = 0 OR 
-        `3rdGrading` = 0 OR 
-        `4thGrading` = 0
-    )
-");
-$in_process_stmt->bind_param("i", $_SESSION['user_id']);
-$in_process_stmt->execute();
-$in_process_result = $in_process_stmt->get_result();
-$in_process_count = $in_process_result->fetch_assoc()['in_process_count'];
-
-// Check if there are grades still in process
-if ($in_process_count > 0) {
-    $grades_status = "In Process: $in_process_count";
+// if the student is enrolled
+if ($yearLevel === "Student Not Enrolled") {
+    $grades_status = "Student Not Enrolled";
+    $top_subjects = ["Student Not Enrolled"];
+    $lowest_subjects = ["Student Not Enrolled"];
 } else {
-    // Calculate the number of failed grades
+    $in_process_stmt = $conn->prepare("
+        SELECT COUNT(*) AS in_process_count
+        FROM grades
+        WHERE student_id = ? AND (
+            `1stGrading` = 0 OR 
+            `2ndGrading` = 0 OR 
+            `3rdGrading` = 0 OR 
+            `4thGrading` = 0
+        )
+    ");
+    $in_process_stmt->bind_param("i", $_SESSION['user_id']);
+    $in_process_stmt->execute();
+    $in_process_result = $in_process_stmt->get_result();
+    $in_process_count = $in_process_result->fetch_assoc()['in_process_count'];
+
+    // grades view process
+    if ($in_process_count > 0) {
+        $grades_status = "In Process: $in_process_count";
+    } else {
+        $grades_stmt = $conn->prepare("
+            SELECT g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
+            FROM grades g
+            WHERE g.student_id = ?
+        ");
+        $grades_stmt->bind_param("i", $_SESSION['user_id']);
+        $grades_stmt->execute();
+        $grades_result = $grades_stmt->get_result();
+
+        $failed_count = 0;
+
+        while ($row = $grades_result->fetch_assoc()) {
+            $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
+
+            if ($average < 75) {
+                $failed_count++;
+            }
+        }
+
+        if ($failed_count > 0) {
+            $grades_status = "Failed: $failed_count";
+        } else {
+            $grades_status = "PASSED";
+        }
+    }
     $grades_stmt = $conn->prepare("
-        SELECT g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
+        SELECT s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
         FROM grades g
+        INNER JOIN subject s ON g.subject_id = s.id
         WHERE g.student_id = ?
     ");
     $grades_stmt->bind_param("i", $_SESSION['user_id']);
     $grades_stmt->execute();
     $grades_result = $grades_stmt->get_result();
 
-    $failed_count = 0;
+    $top_subjects = [];
+    $lowest_subjects = [];
+    $highest_avg = -1;
+    $lowest_avg = 101;
 
     while ($row = $grades_result->fetch_assoc()) {
         $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
-
-        if ($average < 75) {
-            $failed_count++;
+        if ($average == 0) {
+            continue;
+        }
+        if ($average > $highest_avg) {
+            $highest_avg = $average;
+            $top_subjects = [$row['subject_name']];
+        } elseif ($average == $highest_avg) {
+            $top_subjects[] = $row['subject_name'];
+        }
+        if ($average < $lowest_avg) {
+            $lowest_avg = $average;
+            $lowest_subjects = [$row['subject_name']];
+        } elseif ($average == $lowest_avg) {
+            $lowest_subjects[] = $row['subject_name'];
         }
     }
-
-    if ($failed_count > 0) {
-        $grades_status = "Failed: $failed_count";
-    } else {
-        $grades_status = "PASSED";
+    if (!empty(array_intersect($top_subjects, $lowest_subjects))) {
+        $lowest_subjects = [];
     }
 }
-
-// Fetch grades and calculate averages
-$grades_stmt = $conn->prepare("
-    SELECT s.subject_name, g.`1stGrading`, g.`2ndGrading`, g.`3rdGrading`, g.`4thGrading`
-    FROM grades g
-    INNER JOIN subject s ON g.subject_id = s.id
-    WHERE g.student_id = ?
-");
-$grades_stmt->bind_param("i", $_SESSION['user_id']);
-$grades_stmt->execute();
-$grades_result = $grades_stmt->get_result();
-
-$top_subjects = [];
-$lowest_subjects = [];
-$highest_avg = -1;
-$lowest_avg = 101;
-
-while ($row = $grades_result->fetch_assoc()) {
-    $average = ($row['1stGrading'] + $row['2ndGrading'] + $row['3rdGrading'] + $row['4thGrading']) / 4;
-
-    // Skip subjects with an average of 0
-    if ($average == 0) {
-        continue;
-    }
-
-    // Check for top-performing subjects
-    if ($average > $highest_avg) {
-        $highest_avg = $average;
-        $top_subjects = [$row['subject_name']]; // Reset and add the new top subject
-    } elseif ($average == $highest_avg) {
-        $top_subjects[] = $row['subject_name']; // Add to the list of top subjects
-    }
-
-    // Check for lowest-performing subjects
-    if ($average < $lowest_avg) {
-        $lowest_avg = $average;
-        $lowest_subjects = [$row['subject_name']]; // Reset and add the new lowest subject
-    } elseif ($average == $lowest_avg) {
-        $lowest_subjects[] = $row['subject_name']; // Add to the list of lowest subjects
-    }
-}
-
-// Ensure lowest-performing subjects are not the same as top-performing subjects
-if (!empty(array_intersect($top_subjects, $lowest_subjects))) {
-    $lowest_subjects = []; // Clear the lowest-performing subjects if they overlap with top-performing
-}
-
-// Fetch the latest announcement and its creator
 $announcement_stmt = $conn->prepare("
     SELECT a.title, CONCAT(u.FirstName, ' ', u.LastName) AS created_by
     FROM announcements a
@@ -138,4 +142,3 @@ $latest_announcement = $announcement_result->fetch_assoc();
 
 $announcement_title = $latest_announcement['title'] ?? 'No announcements available';
 $announcement_creator = $latest_announcement['created_by'] ?? 'N/A';
-?>
