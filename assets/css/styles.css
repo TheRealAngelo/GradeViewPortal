@@ -249,6 +249,7 @@ ul li a {
     text-decoration: none;
     color: black;
     margin: 0.2rem 0;
+    border-radius: 0.5rem;
 }
 
 li a {
@@ -341,6 +342,7 @@ ul li a:hover{
 .login-title small{
     font-family: Mnt-med;
     margin-top: 0;
+    margin-bottom: 0.5rem;
 }
 
 .login-container img{
@@ -712,6 +714,7 @@ table button img {
 .dash-student-card:hover{
     transform: scale(1.01);
     cursor: pointer;
+    box-shadow: 6px 9px 5px rgba(0, 0, 0, 0.2); 
 }
 
 
@@ -1258,3 +1261,14 @@ table button img {
     margin: 0.5rem 0;
     margin-bottom: 1.5rem;
 }
+a.bar.active { 
+    border-radius: 1rem;
+    background-color: var(--d-green);
+    border-bottom: 4px solid white; 
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    color: white;
+    width: 95%;
+} 
+    /* qudo - search later */ 
+    
