@@ -5,13 +5,16 @@ $current_school_year_result = $conn->query($current_school_year_sql);
 $current_school_year = $current_school_year_result->fetch_assoc();
 $current_school_year_id = $current_school_year['id'];
 
-// Fetch unenrolled students
+// Fetch students with search func
+$search = $_GET['search'] ?? '';
+$search_term = '%' . $search . '%';
+
 $unenrolled_students_sql = "SELECT u.id, CONCAT(u.LastName, ', ', u.FirstName) AS student_name
 FROM users u
 LEFT JOIN grades g ON u.id = g.student_id AND g.school_year_id = ?
-WHERE u.role = 'student' AND g.id IS NULL";
+WHERE u.role = 'student' AND g.id IS NULL AND (u.FirstName LIKE ? OR u.LastName LIKE ?)";
 $unenrolled_students_stmt = $conn->prepare($unenrolled_students_sql);
-$unenrolled_students_stmt->bind_param("i", $current_school_year_id);
+$unenrolled_students_stmt->bind_param("iss", $current_school_year_id, $search_term, $search_term);
 $unenrolled_students_stmt->execute();
 $unenrolled_students_result = $unenrolled_students_stmt->get_result();
 
@@ -54,14 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enroll_students'])) {
         $grade_stmt->close();
         $subject_stmt->close();
         echo "<script>alert('Selected students have been successfully enrolled and grades have been created!');</script>";
-        } else {
+    } else {
         echo "<script>alert('Please select at least one student to enroll.');</script>";
-
-        //ito rin u can also use inpage/in-div message
-        // $message = "Selected students have been successfully enrolled and grades have been created!"; 
-        //} else {
-        //$message = "Please select at least one student to enroll.";//
-
     }
 }
-?>
