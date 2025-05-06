@@ -89,3 +89,32 @@ function announcementChange(){
         
     });
 };
+
+function setActiveLink() { 
+    const links = document.querySelectorAll('a.bar'); 
+    const currentPath = window.location.pathname; 
+// ill figure this out pa kay ga ano sa mga icons
+
+    /*const activeImages = {
+        'vmIcon': '../../assets/icons/icons8-whiteAbout-64.png',
+        'dashboardIcon': '../../assets/icons/icons8-whiteDashboard-96.png',
+        'gradeIcon': '../../assets/icons/icons8-whiteAssessment-100.png',
+        'announcementIcon': '../../assets/icons/icons8-whiteAnnouncement-100.png'
+    };*/
+
+    links.forEach(function(link) { 
+        const linkPath = new URL(link.href).pathname; 
+        if (linkPath === currentPath) { 
+            link.classList.add('active'); 
+
+            /*const img = link.querySelector('img');
+            if (img && activeImages[img.id]) {
+                img.src = `../../assets/icons/${activeImages[img.id]}`;
+            }*/
+            
+        } 
+    }); 
+} 
+
+document.addEventListener('DOMContentLoaded', setActiveLink);
+    
