@@ -110,7 +110,7 @@ require 'dashboardfunc.php';
                             <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($first_grade['3rdGrading']); ?>"></td>
                             <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($first_grade['4thGrading']); ?>"></td>
                             <td>
-                                <button type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
+                                <button class="editbtn" type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
                             </td>
                         </tr>
                         <?php foreach ($student['grades'] as $grade): ?>
