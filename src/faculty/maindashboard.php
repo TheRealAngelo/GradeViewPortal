@@ -20,28 +20,29 @@ include 'maindashboardfunc.php';
     </header>
     <div class="container">
         <?php include 'sidebar.php'; ?>
-        <div class="content content-dashboard noCenter">
-            <div style="display: flex; flex-direction: column; justify-content: center; height: max-content; width: 100%; font-style: bold;">
-                <h2 style="width: 100%; margin-bottom: 2rem;">School Year <?php echo htmlspecialchars($school_year); ?></h2>
+        <div class="content content-dashboard noCenter" style="flex-direction: row; gap: 3rem; width: 100%">
+            <div style="display: flex; flex-direction: column; justify-content: center; height: max-content; width: max-content; font-style: bold;">
+                <h2 style="width: max-content ; margin-bottom: 2rem;">School Year <?php echo htmlspecialchars($school_year); ?></h2>
                 <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
-                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Enrolled Students</h3>
+                        <h3>Enrolled Students</h3>
                         <p><?php echo $student_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
-                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Total Faculty</h3>
+                        <h3>Total Faculty</h3>
                         <p><?php echo $faculty_count; ?></p>
                     </div>
                     <div class="dash-faculty-card">
-                        <h3 style="border-bottom: 1px solid rgba(0, 0, 0, 0.2); width: 100%;">Total Announcements</h3>
+                        <h3>Total Announcements</h3>
                         <p><?php echo $announcement_count; ?></p>
                     </div>
                 </div>
+            </div>
 
-
-                <h2 style="width: 100%; margin-top: 4rem; margin-bottom: 2rem;">Number of students per Year</h2>
-                <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 50%;">
-                    <canvas id="myChart"></canvas>
+            <div class="chartThings">
+            <h2 style="width: 100%;">Number of students per Year</h2>
+                <div style="display: flex; flex-direction: column; align-items: center; width: 100%; height: 100%;">
+                    <canvas style="width: 100%; height: 30rem;" id="myChart"></canvas>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

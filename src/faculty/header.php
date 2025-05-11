@@ -103,6 +103,8 @@
                 }
             }
         };
+
+        
     </script>
         <!--END OF MODAL CODE-->
         <!-- This shit is for right side of header, like pfp and shit --> 
