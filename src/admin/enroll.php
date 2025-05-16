@@ -1,20 +1,31 @@
 <?php
-// Fetch current school year
-$current_school_year_sql = "SELECT id, year_start, year_end FROM school_year WHERE year_start = 2025 AND year_end = 2026"; // Update dynamically as needed
-$current_school_year_result = $conn->query($current_school_year_sql);
-$current_school_year = $current_school_year_result->fetch_assoc();
-$current_school_year_id = $current_school_year['id'];
+// Get selected school year from GET or fallback to latest
+if (isset($_GET['school_year']) && is_numeric($_GET['school_year'])) {
+    $current_school_year_id = intval($_GET['school_year']);
+    $current_school_year_sql = "SELECT id, year_start, year_end FROM school_year WHERE id = ?";
+    $current_school_year_stmt = $conn->prepare($current_school_year_sql);
+    $current_school_year_stmt->bind_param("i", $current_school_year_id);
+    $current_school_year_stmt->execute();
+    $current_school_year_result = $current_school_year_stmt->get_result();
+    $current_school_year = $current_school_year_result->fetch_assoc();
+    $current_school_year_stmt->close();
+} else {
+    $current_school_year_sql = "SELECT id, year_start, year_end FROM school_year ORDER BY year_start DESC LIMIT 1";
+    $current_school_year_result = $conn->query($current_school_year_sql);
+    $current_school_year = $current_school_year_result->fetch_assoc();
+    $current_school_year_id = $current_school_year['id'];
+}
 
-// Fetch students with search func
+// Fetch students with search func (ID or name)
 $search = $_GET['search'] ?? '';
 $search_term = '%' . $search . '%';
 
 $unenrolled_students_sql = "SELECT u.id, CONCAT(u.LastName, ', ', u.FirstName) AS student_name
 FROM users u
 LEFT JOIN grades g ON u.id = g.student_id AND g.school_year_id = ?
-WHERE u.role = 'student' AND g.id IS NULL AND (u.FirstName LIKE ? OR u.LastName LIKE ?)";
+WHERE u.role = 'student' AND g.id IS NULL AND (CAST(u.id AS CHAR) LIKE ? OR u.FirstName LIKE ? OR u.LastName LIKE ?)";
 $unenrolled_students_stmt = $conn->prepare($unenrolled_students_sql);
-$unenrolled_students_stmt->bind_param("iss", $current_school_year_id, $search_term, $search_term);
+$unenrolled_students_stmt->bind_param("isss", $current_school_year_id, $search_term, $search_term, $search_term);
 $unenrolled_students_stmt->execute();
 $unenrolled_students_result = $unenrolled_students_stmt->get_result();
 

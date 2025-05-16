@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2025 at 04:55 PM
+-- Generation Time: May 16, 2025 at 02:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -574,7 +574,8 @@ CREATE TABLE `school_year` (
 --
 
 INSERT INTO `school_year` (`id`, `year_start`, `year_end`) VALUES
-(1, 2025, 2026);
+(1, 2025, 2026),
+(2, 2026, 2027);
 
 -- --------------------------------------------------------
 
@@ -648,7 +649,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `FirstName`, `LastName`, `password`, `role`, `created_at`) VALUES
 (2, 'Dan@gmail.com', 'Dan Michael', 'Oro', '$2y$10$SnU1.HVurUV3tRdZuqdmRO.TKRs.U5TMcpOX.Q2rUKGVxHKUrn3UG', 'faculty', '2025-04-12 13:41:58'),
-(8, 'angelo@gmail.com', 'Angelo', 'Morales', '$2y$10$aXG5G/Pw1UA/cd/4FhtA4.Y8BQjsa7NTzvsp9sODgb7/D4r0jxUMy', 'student', '2025-04-13 03:05:10'),
+(8, 'angelo@gmail.com', 'Angelo', 'Morales', '$2y$10$QdMNKhzM4HfgSwE1F0yp/u1uSg10i6RXuS.p2lpX.kSKQef8UZZ4K', 'student', '2025-04-13 03:05:10'),
 (9, 'Juan@gmail.com', 'Juan', 'Dela Cruz', '$2y$10$ojajWZptzrnVQiiELmylO.kTPcIPdX58uBWuDfNxZyA9jHvCvP.i.', 'student', '2025-04-13 04:38:54'),
 (10, 'lebron@gmail.com', 'Lebron', 'James', '$2y$10$O7ImQfEwAUlrFLg35CdZeuQsNVpBPGqMS2Ql1jvF61nbYwM571dBu', 'student', '2025-04-30 15:06:29'),
 (11, 'john@gmail.com', 'John', 'Smith', '$2y$10$WRl15imEVGHuKmpEpMOLy.pEjb1jJr2fnmiXXgeiguMtGeJpPVAou', 'student', '2025-05-01 11:47:34'),
@@ -717,7 +718,7 @@ INSERT INTO `users` (`id`, `username`, `FirstName`, `LastName`, `password`, `rol
 (74, 'Savannah@gmail.com', 'Savannah', 'Mendez', '$2y$10$3rDGb6x74./Y0PlhfcMNouWtxvmQwBcg.GeDqB8bCp98YYKlCIvym', 'student', '2025-05-04 14:44:37'),
 (75, 'Nora@gmail.com', 'Nora', 'Mercado', '$2y$10$/bYf/f837CfcnTRihwPy7.lgpt8Sdd9K3VRIDba0Zk0EomZDPZd9K', 'student', '2025-05-04 14:44:37'),
 (76, 'Niece@gmail.com', 'Niece', 'Cabrera', '$2y$10$.K/AzqvankTj9dVMiIUGU.7Cykf6cnsjzE75V8X9lCDdovPY0axGm', 'student', '2025-05-04 14:44:37'),
-(77, 'Hunter@gmail.com', 'Hunter', 'Rivera', '$2y$10$5yQwEJzHuyKgTZTRy3w8MeZGrN.xS.q9JuZiw8BX4FwKoe2BTxoN.', 'student', '2025-05-04 14:44:37'),
+(77, 'Hunter@gmail.com', 'Hunter', 'Rivera', '$2y$10$r0Qc72//R0pYMlgCQxrDDu57bVXBRreSVE5GRCIxfLr7dlY/IGyZe', 'student', '2025-05-04 14:44:37'),
 (78, 'Jonathan@gmail.com', 'Jonathan', 'Pena', '$2y$10$DtU5z1C3qNrFPnXPnC541ue/9erH/Iq.rLm8tU.hBRvPoRSiqpaYq', 'student', '2025-05-04 14:44:37'),
 (79, 'Xavier@gmail.com', 'Xavier', 'Alvarez', '$2y$10$Xx1byPWHZaILmwdarwaQm.0m.GjvrQ6ztuX6WxM5p/W6JZntL.eA6', 'student', '2025-05-04 14:44:37'),
 (80, 'Cameron@gmail.com', 'Cameron', 'Castillo', '$2y$10$VSg1L4kAeHCRuLI6t2Ap.OtjZY4gjd30gPKyWUqEQgM.dk3HtSmUa', 'student', '2025-05-04 14:44:37'),
@@ -816,7 +817,7 @@ ALTER TABLE `grades`
 -- AUTO_INCREMENT for table `school_year`
 --
 ALTER TABLE `school_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `subject`

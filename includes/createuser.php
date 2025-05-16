@@ -10,8 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['users_file'])) {
     if ($handle === false) {
         die('Error opening file.');
     }
-
-    // Skip the header row
     fgetcsv($handle);
 
     // Process each row
@@ -50,22 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['users_file'])) {
     // Export users to CSV
     header('Content-Type: text/csv');
     header('Content-Disposition: attachment; filename="users_export.csv"');
-
-    // Open output stream
     $output = fopen('php://output', 'w');
-
-    // Write the column headers
     fputcsv($output, ['Username', 'First Name', 'Last Name', 'Role', 'Password']);
-
-    // Fetch data from the `users` table
     $sql = "SELECT username, FirstName, LastName, role, '' AS password FROM users";
     $result = $conn->query($sql);
 
-    // Write each row to the CSV
     while ($row = $result->fetch_assoc()) {
         fputcsv($output, $row);
     }
-
     fclose($output);
     exit();
 }
@@ -73,11 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['users_file'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Export and Import Users</title>
 </head>
+
 <body>
     <h1>Export and Import Users</h1>
 
@@ -95,4 +87,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['users_file'])) {
         <button type="submit">Import Users</button>
     </form>
 </body>
+
 </html>

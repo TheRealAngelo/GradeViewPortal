@@ -74,7 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="login-wrapper">
         <div class="login-container">
             <div class="login-img-container">
-                <img src="../../assets/images/SVA_logo.png">
+                <a href="../index.php">
+                    <img src="../../assets/images/SVA_logo.png" style="cursor:pointer;">
+                </a>
             </div>
             <div class="login-inputs-things">
                 <div class="login-title">
