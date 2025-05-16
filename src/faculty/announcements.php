@@ -19,7 +19,7 @@ include_once 'announcementsfunc.php';
     <div class="container">
     <div class="modalBlackbg" id="showMe">
         <div class="modalContainer">
-            <h2>Update Announcements</h2>
+            <h2>Create Announcements</h2>
             <!-- Balik lang ang question mark sa start for debuggin -->
             <!--<php if (!empty($message)): ?>
             <p><php echo $message; ?></p>
