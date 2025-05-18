@@ -6,6 +6,7 @@ require 'dashboardfunc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,20 +36,21 @@ require 'dashboardfunc.php';
         }
     </script>
     <script>
-    function validateGradesForm(event) {
-        const inputs = document.querySelectorAll('input[type="number"]');
-        for (const input of inputs) {
-            const value = parseInt(input.value, 10);
-            if (isNaN(value) || value < 0 || value > 100) {
-                alert("Please enter a valid grade between 0 and 100.");
-                event.preventDefault();
-                return false;
+        function validateGradesForm(event) {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            for (const input of inputs) {
+                const value = parseInt(input.value, 10);
+                if (isNaN(value) || value < 0 || value > 100) {
+                    alert("Please enter a valid grade between 0 and 100.");
+                    event.preventDefault();
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
-    }
-</script>
+    </script>
 </head>
+
 <body>
     <header>
         <?php include 'header.php'; ?>
@@ -88,7 +90,7 @@ require 'dashboardfunc.php';
                     <button type="submit">Search</button>
                 </form>
             </div>
-            
+
             <form method="POST" action="update_grades.php" onsubmit="return validateGradesForm(event)">
                 <table class="noMarginTop noRoundTopLeftCorner">
                     <tr>
@@ -100,34 +102,42 @@ require 'dashboardfunc.php';
                         <th>4th Grading</th>
                         <th>Actions</th>
                     </tr>
-                    <?php foreach ($students as $student): ?>
+                    <?php if (empty($students)): ?>
                         <tr>
-                            <td class="stud-name noHover" rowspan="<?php echo count($student['grades']); ?>"><?php echo htmlspecialchars($student['name']); ?></td>
-                            <?php $first_grade = array_shift($student['grades']); ?>
-                            <td><?php echo htmlspecialchars($first_grade['subject_name']); ?></td>
-                            <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][1stGrading]" value="<?php echo htmlspecialchars($first_grade['1stGrading']); ?>"></td>
-                            <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][2ndGrading]" value="<?php echo htmlspecialchars($first_grade['2ndGrading']); ?>"></td>
-                            <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($first_grade['3rdGrading']); ?>"></td>
-                            <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($first_grade['4thGrading']); ?>"></td>
-                            <td>
-                                <button class="editbtn" type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
-                            </td>
+                            <td colspan="7" style="text-align:center;">No students enrolled currently.</td>
                         </tr>
-                        <?php foreach ($student['grades'] as $grade): ?>
+                    <?php else: ?>
+                        <?php foreach ($students as $student): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($grade['subject_name']); ?></td>
-                                <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][1stGrading]" value="<?php echo htmlspecialchars($grade['1stGrading']); ?>"></td>
-                                <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][2ndGrading]" value="<?php echo htmlspecialchars($grade['2ndGrading']); ?>"></td>
-                                <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($grade['3rdGrading']); ?>"></td>
-                                <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($grade['4thGrading']); ?>"></td>
+                                <td class="stud-name noHover" rowspan="<?php echo count($student['grades']); ?>"><?php echo htmlspecialchars($student['name']); ?></td>
+                                <?php $first_grade = array_shift($student['grades']); ?>
+                                <td><?php echo htmlspecialchars($first_grade['subject_name']); ?></td>
+                                <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][1stGrading]" value="<?php echo htmlspecialchars($first_grade['1stGrading']); ?>"></td>
+                                <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][2ndGrading]" value="<?php echo htmlspecialchars($first_grade['2ndGrading']); ?>"></td>
+                                <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($first_grade['3rdGrading']); ?>"></td>
+                                <td><input type="number" name="grades[<?php echo $first_grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($first_grade['4thGrading']); ?>"></td>
                                 <td>
-                                <button type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>                                </td>
+                                    <button class="editbtn" type="submit" name="update" value="<?php echo $first_grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
+                                </td>
                             </tr>
+                            <?php foreach ($student['grades'] as $grade): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($grade['subject_name']); ?></td>
+                                    <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][1stGrading]" value="<?php echo htmlspecialchars($grade['1stGrading']); ?>"></td>
+                                    <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][2ndGrading]" value="<?php echo htmlspecialchars($grade['2ndGrading']); ?>"></td>
+                                    <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][3rdGrading]" value="<?php echo htmlspecialchars($grade['3rdGrading']); ?>"></td>
+                                    <td><input type="number" name="grades[<?php echo $grade['grade_id']; ?>][4thGrading]" value="<?php echo htmlspecialchars($grade['4thGrading']); ?>"></td>
+                                    <td>
+                                        <button type="submit" name="update" value="<?php echo $grade['grade_id']; ?>"><img src="../../assets/icons/icons8-save-96.png"></button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         <?php endforeach; ?>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </table>
             </form>
         </div>
     </div>
 </body>
+
 </html>
