@@ -104,7 +104,13 @@ require 'dashboardfunc.php';
                     </tr>
                     <?php if (empty($students)): ?>
                         <tr>
-                            <td colspan="7" style="text-align:center;">No students enrolled currently.</td>
+                            <td colspan="7" style="text-align:center;">
+                                <?php if (!empty($search)): ?>
+                                    No <?php echo htmlspecialchars($search); ?> currently enrolled
+                                <?php else: ?>
+                                    No students currently enrolled
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php else: ?>
                         <?php foreach ($students as $student): ?>
