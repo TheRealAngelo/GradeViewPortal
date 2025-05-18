@@ -26,7 +26,9 @@ include 'maindashboardfunc.php';
                 <div class="dash-faculty-stats">
                     <div class="dash-faculty-card">
                         <h3>Enrolled Students</h3>
-                        <p><?php echo $student_count; ?></p>
+                        <p>
+                            <?php echo ($student_count == 0) ? 'No Enrolled students' : $student_count; ?>
+                        </p>
                     </div>
                     <div class="dash-faculty-card">
                         <h3>Total Faculty</h3>
