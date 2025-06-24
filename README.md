@@ -91,3 +91,7 @@ This project was developed by ADHD as part of the Software Engineering Final pro
 ## License
 
 This project is for educational purposes only.
+
+---
+
+<div align="center"> <p>Angelo Morales © 2024 GVS</p> </div>
